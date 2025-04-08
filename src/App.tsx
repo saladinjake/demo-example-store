@@ -15,22 +15,7 @@ const Button = styled.button`
   width:200px;
 `
 
-const Container = styled.main`
-  width: 100%;
-  height: auto;
-  display: flex;
-  // justify-content: center;
-  // align-items: center;
-  flex-direction: column;
-  background: ${props => props.theme.color.primary};
-  padding:10px;
-  margin:10px;
 
-  & h4{
-   font-size: 20px;
-   padding:10px;
-  }
-`
 
 const Title = styled.h1`
  
@@ -55,7 +40,8 @@ const Flex = styled.div<{
   align-items: ${({ align }) => align ? align : "left"};
   flex-direction: ${({ direction }) => direction ? direction : "row"};
   flex-gap: ${({ gap }) => gap ? gap : "10px"}
-`
+ 
+  `
 
 const Text = styled.div<{ mode?: string }>`
  font-size: 14px;
@@ -67,12 +53,10 @@ const Text = styled.div<{ mode?: string }>`
 
 const CardSample = styled.div`
   box-shadow: 12px -50px 50px rgba(255,255,255,0.8);
-  display: flex;
-  align-items: center;
-  justify-content: left;
+
   padding: 12px;
   margin: 10px;
-  border: 5px solid #fafafa;
+ 
   border-radius: 10px;
 `
 
@@ -84,20 +68,12 @@ const Avatar = styled.img`
  
 `
 
-const RepoContainer = styled.div`
- padding: 10px;
- display: flex;
- flex-direction: row;
-  flex-gap:15px;
-width:100%;
-`
+
 const Repository = styled.div`
-  display: flex;
-  justify-content:center;
- padding:20px;
- flex-direction: column;
-
-
+ width: 300px;
+ float:left;
+ height: 200px;
+ border: 2px solid #eaeaea;
 `
 
 const Heading = styled.h3`
@@ -153,7 +129,7 @@ function App() {
   }
   return (
     <div>
-      <Container>
+    
 
 
 
@@ -189,7 +165,7 @@ function App() {
         }
         </CardSample>
 
-      </Container>
+     
 
 
 
