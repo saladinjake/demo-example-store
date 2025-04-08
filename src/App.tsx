@@ -49,12 +49,30 @@ const Flex = styled.div<{ direction?: string;
   flex-gap: ${({ gap}) => gap ? gap : "10px"}
 `
 
+const Text = styled.div`
+ font-size: 14px;
+ padding: 2px;
+ margin: 2px;
+
+`
+
+const CardSample = styled.div`
+`
+
+const Avatar = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  padding:5px;
+ 
+`
 
 function App() {
   const [mode, setMode] = useMode();
   const [searchField, setSearchField] = useState<string>("");
   const [profile, setProfile] = useState<any>({});
-  const [error, setError] = useState<string>("")
+  const [error, setError] = useState<string| null>(null)
+  const [totalFollowers,setTotalFollowersCount] = useState<number>(0);
   const handleToggle = () => {
     setMode((mode) => mode === 'light' ? 'dark' : 'light');
   }
@@ -64,19 +82,28 @@ function App() {
     try{
 
     
-       const response = await( await fetch(`https://api.github.com/users/${searchField}`));
-       console.log( await response.json(),">>>")
+       const response = ( await fetch(`https://api.github.com/users/${searchField}`));
+      const data = await response.json()
 
-       if(response.ok){
-         setProfile(response.json())
+       //get followers
+       const folowersResponse = await fetch(`https://api.github.com/users/${data.login}/followers`)
+
+       const followersResult = await folowersResponse.json()
+       console.log(followersResult,">>>")
+
+       if(response.ok && folowersResponse.ok){
+         setProfile(data)
+         setTotalFollowersCount(followersResult.length)
        }else{
          setProfile({})
          setError("No record Found.")
        }
 
       } catch(error){
-        setError("Some Error Occured.")
+        // setError("Some Error Occured.")
       }
+
+     
   }
 
   const handleChange = (event: any) => {
@@ -102,6 +129,22 @@ function App() {
         <Input onChange={handleChange} />
         <Button onClick={handleGetApiRequest}> Search</Button>
       </Flex>
+
+
+
+      {
+        error ? <Text>{ error} </Text> : (
+          <>
+          {profile && (
+            <div>
+               <Avatar src={profile?.avatar_url} />
+               <Text>Name: {profile?.login}</Text>
+               <Text>Followers (count): {totalFollowers} </Text>
+            </div>
+          )}
+          </>
+        )
+      }
     </Container>
   )
 }
