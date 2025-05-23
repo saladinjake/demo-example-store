@@ -2,8 +2,8 @@ import styled from "styled-components"
 export const HeroBanner = () => {
     return(
          <HeroWrapper>
-        <h4>Trade-in-offer</h4>
-        <h2>Super value deals</h2>
+        <h4>Shop with Confidence</h4>
+        <h2>Sring Board Merchant</h2>
         <h1>On all products</h1>
         <p>Save more with coupons & up to 70% off!</p>
         <CtaButton>Shop Now</CtaButton>
@@ -16,7 +16,7 @@ const HeroWrapper = styled.section`
  background: #E3E6F3;
     background-image: url(images/mobanner6.jpg);
     width: 100%;
-    height: 60vh;
+    height: 70vh;
     background-size: cover;
     background-position: top 25% right 0;
     padding: 0 80px;
