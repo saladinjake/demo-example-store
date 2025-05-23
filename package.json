@@ -10,10 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.21",
     "lodash.merge": "^4.6.2",
+    "postcss": "^8.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^6.1.8"
+    "react-router-dom": "^7.6.0",
+    "styled-components": "^6.1.8",
+    "tailwindcss": "^4.1.7"
   },
   "devDependencies": {
     "@types/lodash.merge": "^4.6.9",
