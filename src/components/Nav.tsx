@@ -74,7 +74,7 @@ const MenuItem =styled.li`
 
 &   a:hover,
 &   a.active {
-    color: #088178;
+    color: #f60;
 }
 
 &   a:hover::after,
@@ -82,7 +82,7 @@ const MenuItem =styled.li`
     content: "";
     width: 30%;
     height: 2px;
-    background: #088178;
+    background: #f60;
     position: absolute;
     bottom: -4px;
     left: 20px;

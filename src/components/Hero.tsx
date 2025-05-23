@@ -3,7 +3,7 @@ export const HeroBanner = () => {
     return(
          <HeroWrapper>
         <h4>Shop with Confidence</h4>
-        <h2>Sring Board Merchant</h2>
+        <h2>Spring Board Merchant</h2>
         <h1>On all products</h1>
         <p>Save more with coupons & up to 70% off!</p>
         <CtaButton>Shop Now</CtaButton>
