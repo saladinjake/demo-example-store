@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { ProductCard } from "./ProductCard"
-export const ProductListing = () => {
+export const ProductListing = ({ title, subTitle }) => {
      const products = [
         {name:"Rock Town T-shirt", thumbnail:"/images/products/f1.jpg", price:"$22.44", brand:"Rock town"},
         {name:"Cardilac T-shirt", thumbnail:"/images/products/f2.jpg", price:"$22.44", brand:"Mtv"},
@@ -14,8 +14,8 @@ export const ProductListing = () => {
     ]
     return (
         <ProductLisingWrapper>
-             <h2>Featured Products</h2>
-        <p>T-shirts Collection For Men</p>
+             <h2>{title}</h2>
+        <p>{subTitle}</p>
             <Container>
                 
          {products.map(item => {

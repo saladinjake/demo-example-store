@@ -3,6 +3,7 @@ import { HeroBanner } from "../../components/Hero"
 import { BannerAdsSales } from "../../components/BannerFlashSales"
 import {Footer } from "../../components/Footer"
 import { ProductListing } from "../../components/Products/ProductList"
+import { OffSalesDiscountBanner } from "../../components/BannerOffSales"
 import { NewsLetterSection } from "../../components/Newsletter"
 const HomeModule =  () => {
     return (
@@ -10,7 +11,8 @@ const HomeModule =  () => {
       <HeroBanner/>
 
       <BannerAdsSales/>
-      <ProductListing/>
+      <ProductListing title="Featured Products " subTitle="T-shirts Collection For Men"/>
+      <OffSalesDiscountBanner/>
       <NewsLetterSection/>
       <Footer/>
 
