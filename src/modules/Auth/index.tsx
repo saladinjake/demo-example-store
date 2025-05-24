@@ -6,8 +6,15 @@ import Button from "../../components/UIElements/Button"
 import { useState } from "react"
 import {loginValidations }  from "./validations";
 import useForm, { hasError } from "../../hooks/useForm";
+import { useAuth } from "../../hooks/useAuth"
+import { useNavigate } from "react-router-dom"
 const SignIn = () => {
+
+  const navigate = useNavigate(); 
+  const { user, login, signup, logout } = useAuth(); 
   const [editable,setEditable] = useState(true)
+
+   const [error, setError] = useState("");
     const [credentials, setCredentials]  = useState({
       email:"",
       password:""
@@ -19,6 +26,25 @@ const SignIn = () => {
       validations: loginValidations,
       onSubmit() {},
     });
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!values.email || !values.password) {
+      setError("Email and password required");
+      return;
+    }
+    
+     const success = login(values);
+    
+    if (success) {
+      navigate("/");
+    } else {
+      setError("Login failed");
+    }
+  };
+
     return (
         <AuthLayout>
            <Column>
@@ -36,6 +62,7 @@ const SignIn = () => {
                   <Flex direction="column" mt="10" justifyContent="center" alignItems="center">
                        
                        <Box mt="4">        <a href="#"><img src="images/logo.png" className="logo" alt="Shop" /></a></Box>
+                       
                        <Box mb="4" mt="4">
                         <Input
                 required
@@ -70,6 +97,7 @@ const SignIn = () => {
                 width="330px"
               />
                         </Box>
+                        {error && <p className="text-red-600 mb-2">{error}</p>}
                        </Flex>
 
 

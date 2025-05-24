@@ -7,8 +7,12 @@ import { useState } from "react"
 import { Column, FormBox, AuthLayout}  from "./"
 import {registerValidations }  from "./validations";
 import useForm, { hasError } from "../../hooks/useForm";
-
+import { useAuth } from "../../hooks/useAuth"
+import { useNavigate } from "react-router-dom"
 const SignUp = () => {
+    const navigate = useNavigate(); 
+  const { user,  signup, logout } = useAuth(); 
+  const [editable,setEditable] = useState(true)
 
     const [credentials, setCredentials]  = useState({
       email:"",
@@ -16,8 +20,8 @@ const SignUp = () => {
       password:""
 
     })
-     const [editable,setEditable] = useState(true)
-    
+  
+   const [error, setError] = useState("");    
 
     const { values, handleChange, handleSubmit, errors, touched, invalid } =
     useForm({
@@ -25,6 +29,29 @@ const SignUp = () => {
       validations: registerValidations,
       onSubmit() {},
     });
+
+
+    
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!values.email || !values.password) {
+      setError("Email and password required");
+      return;
+    }
+    
+    if (values.password && values.confirmPassword &&  (values.password !==values.confirmPassword)) {
+      setError("Password mismatch");
+      return;
+    }
+     const success = signup(values);
+    
+    if (success) {
+      navigate("/");
+    } else {
+      setError("Login failed");
+    }
+  };
+
     return (
         <AuthLayout>
            <Column>
