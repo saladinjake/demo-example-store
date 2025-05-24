@@ -118,11 +118,10 @@ export const ProductListing = ({ title, subTitle }) => {
                 label="Search"
                 isLoading={false}
                 name="password"
-                value={""}
-                // onChangePure={handleChange}
-                // error={hasError("password", touched, errors)}
-                // message={hasError("password", touched, errors)}
-                placeholder="search"
+                placeholder="Search products..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+               
                 width="330px"
               />
 
