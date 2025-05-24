@@ -2,6 +2,8 @@ import { Routes, Route, Link,  } from "react-router-dom";
 import { Header } from "../components/Nav"
 import { lazy } from "react"
 const HomePageModule = lazy(() => import("../modules/Home"))
+const AuthModule = lazy(() => import("../modules/Auth"))
+
 export const RouteOutlets = () => {
 
     return (
@@ -11,7 +13,7 @@ export const RouteOutlets = () => {
           <Route exact path="/" element={<HomePageModule/>} />
           <Route path="/products" element={<>Products page</>} />
           <Route path="/cart" element={<>Cart page</>} />
-          <Route path="/login" element={<>Login</>} />
+          <Route path="/login" element={<AuthModule/>} />
         </Routes>
 
         </>
