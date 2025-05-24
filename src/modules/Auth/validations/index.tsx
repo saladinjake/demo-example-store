@@ -1,4 +1,4 @@
-import model from "utils/hooks/useForm/utilities/model";
+import model from "../../../hooks/useForm/utilities/model";
 
 interface IAuth{
     email: string;
@@ -11,9 +11,9 @@ email: string;
     confirmPassword: string;
 
 }
-const loginValiations = (values: IAuth) => {
+const loginValidations = (values: IAuth) => {
   const errors = {
-    ...model("email")(values.name)("isRequired"),
+    ...model("email")(values.name)("isRequired|isEmail"),
     ...model("password")(values.route)("isRequired|min:2"),
    
   };
@@ -22,9 +22,9 @@ const loginValiations = (values: IAuth) => {
 };
 
 
-const registerValiations = (values: IRegister) => {
+const registerValidations = (values: IRegister) => {
   const errors = {
-    ...model("email")(values.email)("isRequired"),
+    ...model("email")(values.email)("isRequired|isEmail"),
     ...model("password")(values.password)("isRequired|min:2"),
     ...model("confirmPassword")(values.confirmPassword)("isRequired|min:2"),
    
@@ -34,4 +34,4 @@ const registerValiations = (values: IRegister) => {
 };
 
 
-export const validations =   { registerValiations, loginValiations };
+export   { registerValidations, loginValidations };

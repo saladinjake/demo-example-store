@@ -8,10 +8,10 @@ import { Column, FormBox, AuthLayout}  from "./"
 import {registerValidations }  from "./validations";
 import useForm, { hasError } from "../../hooks/useForm";
 
-const SignUp = () => {
+const ResetPassword = () => {
 
     const [credentials, setCredentials]  = useState({
-      email:"",
+      
       confirmPassword:"",
       password:""
 
@@ -42,22 +42,7 @@ const SignUp = () => {
 b                    <Flex direction="column" mt="10" justifyContent="center" alignItems="center">
                        
                        <Box mt="4">        <a href="#"><img src="images/logo.png" className="logo" alt="Shop" /></a></Box>
-                    <Box mb="4" mt="4">
-                        <Input
-                required
-                label="Email"
-                isLoading={false}
-                disabled={!editable}
-                name="email"
-                value={values?.email}
-                onChangePure={handleChange}
-                error={hasError("email", touched, errors)}
-                message={hasError("email", touched, errors)}
-                placeholder="Enter Email"
-                width="330px"
-              />
-                        </Box>
-
+                    
 
                         
                        <Box mb="2">
@@ -102,7 +87,7 @@ b                    <Flex direction="column" mt="10" justifyContent="center" al
 
         </Flex>
                        <Flex mb="18" justifyContent="end"  mr="20">
-               <Box mb="4"><Button  color="primary" variant="outline">Register</Button></Box>
+               <Box mb="4"><Button  color="primary" variant="outline">Reset</Button></Box>
                      </Flex>
             </FormBox>
 
@@ -112,4 +97,4 @@ b                    <Flex direction="column" mt="10" justifyContent="center" al
     )
 }
 
-export default SignUp
+export default ResetPassword

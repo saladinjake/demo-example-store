@@ -30,7 +30,7 @@ const HeaderWraper = styled.section`
     aMenuItemgn-items: center;
     justify-content: space-between;
     padding: 20px 80px;
-    background: #E3E6F3;
+    background: #fff; /*#E3E6F3;*/
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
     z-index: 999;
     position: sticky;

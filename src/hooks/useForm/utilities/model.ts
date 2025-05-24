@@ -1,4 +1,14 @@
-import { titleCase } from "utils";
+
+export const titleCase = (str) => {
+  var splitStr = str.toLowerCase().split(" ");
+  for (var i = 0; i < splitStr.length; i++) {
+    splitStr[i] =
+      splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+  }
+
+  return splitStr.join(" ");
+};
+
 const sentenceCase = (str) => str.replace(/([a-zA-Z])(?=[A-Z])/g, "$1 ");
 const errorDetail = (str) => titleCase(sentenceCase(str));
 const model =

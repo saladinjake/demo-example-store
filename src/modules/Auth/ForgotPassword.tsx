@@ -8,11 +8,9 @@ import { Column, FormBox, AuthLayout}  from "./"
 import {registerValidations }  from "./validations";
 import useForm, { hasError } from "../../hooks/useForm";
 
-const SignUp = () => {
+const ForgotPassword = () => {
 
     const [credentials, setCredentials]  = useState({
-      email:"",
-      confirmPassword:"",
       password:""
 
     })
@@ -42,22 +40,7 @@ const SignUp = () => {
 b                    <Flex direction="column" mt="10" justifyContent="center" alignItems="center">
                        
                        <Box mt="4">        <a href="#"><img src="images/logo.png" className="logo" alt="Shop" /></a></Box>
-                    <Box mb="4" mt="4">
-                        <Input
-                required
-                label="Email"
-                isLoading={false}
-                disabled={!editable}
-                name="email"
-                value={values?.email}
-                onChangePure={handleChange}
-                error={hasError("email", touched, errors)}
-                message={hasError("email", touched, errors)}
-                placeholder="Enter Email"
-                width="330px"
-              />
-                        </Box>
-
+                    
 
                         
                        <Box mb="2">
@@ -76,33 +59,16 @@ b                    <Flex direction="column" mt="10" justifyContent="center" al
                 width="330px"
               />
                         </Box>
-                                       <Box mb="2">
-                        <Input
-                required
-                label="Confirm Password"
-                isLoading={false}
-                disabled={!editable}
-                name="confirmPassword"
-                type="password"
-                value={values?.password}
-                onChangePure={handleChange}
-                error={hasError("confirmPassword", touched, errors)}
-                message={hasError("confirmPassword", touched, errors)}
-                placeholder="************"
-                width="330px"
-              />
-                        </Box>
-
-
+                                       
                 </Flex>
    <Flex ml="16" justifyContent="between" mr="6">
                         <p>
-        {"Already have an account?"}{" "}</p>
+        {"I Remember my account?"}{" "}</p>
 
 
         </Flex>
                        <Flex mb="18" justifyContent="end"  mr="20">
-               <Box mb="4"><Button  color="primary" variant="outline">Register</Button></Box>
+               <Box mb="4"><Button  color="primary" variant="outline">Reset</Button></Box>
                      </Flex>
             </FormBox>
 
@@ -112,4 +78,4 @@ b                    <Flex direction="column" mt="10" justifyContent="center" al
     )
 }
 
-export default SignUp
+export default ForgotPassword
