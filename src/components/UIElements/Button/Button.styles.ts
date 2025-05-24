@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
 import { ButtonProps } from "./Button.types";
-import theme from "../../theme";
+import { theme } from "../../../theme/style/theme";
+
+console.log(theme,">>")
 
 export const StyledButton = styled.button<ButtonProps>`
   display: flex;
@@ -28,11 +30,11 @@ export const StyledButton = styled.button<ButtonProps>`
       : ""};
   background: ${(props) =>
     props.color === "primary"
-      ? theme.colors.kudaPurple
+      ? theme.light.colors.Purple
       : props.color === "secondary"
       ? "rgba(239, 241, 255, 0.5)"
       : props.color === "danger"
-      ? theme.colors.kudaRed
+      ? theme.light.colors.Red
       : ""};
 
   ${(props) =>
@@ -46,7 +48,7 @@ export const StyledButton = styled.button<ButtonProps>`
     props.variant === "text" &&
     css`
       background: none;
-      color: ${theme.colors.kudaPurple};
+      color: ${theme.light.colors.Purple};
       padding: 0;
     `};
 
@@ -61,7 +63,7 @@ export const StyledButton = styled.button<ButtonProps>`
     css`
       border: 1px solid rgba(64, 25, 109, 0.3);
       background: rgba(239, 241, 255, 0.5);
-      color: ${theme.colors.kudaPurple};
+      color: ${theme.light.colors.Purple};
     `};
 
   .icon-left {

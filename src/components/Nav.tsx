@@ -9,9 +9,8 @@ export const Header = () => {
             <Menu>
                 <MenuItem><a className="active" href="/">Home</a></MenuItem>
                 <MenuItem><a href="/shop">Shop</a></MenuItem>
-                <MenuItem><a href="/poMenuItemcy">Blog</a></MenuItem>
                 <MenuItem><a href="/login">Login</a></MenuItem>
-                <MenuItem><a href="/signup">Signup</a></MenuItem>
+                <MenuItem><a href="/register">Signup</a></MenuItem>
                 <MenuItem id="lg-bag"><a href="/cart"><i className="far fa-shopping-bag"></i></a></MenuItem>
                 <a href="#" id="close"><i className="far fa-times"></i></a>
             </Menu>

@@ -2,6 +2,7 @@ import styled from "styled-components"
 import Input from "../../components/UIElements/Input"
 import Flex from "../../components/UIElements/Flex"
 import Box from "../../components/UIElements/Box"
+import Button from "../../components/UIElements/Button"
 import { useState } from "react"
 
 const SignIn = () => {
@@ -26,7 +27,7 @@ const SignIn = () => {
            </Column>
            <Column>
                <FormBox>
-b                    <Flex direction="column" mt="10" justifyContent="center" alignItems="center">
+                  <Flex direction="column" mt="10" justifyContent="center" alignItems="center">
                        
                        <Box mt="4">        <a href="#"><img src="images/logo.png" className="logo" alt="Shop" /></a></Box>
                        <Box mb="4" mt="4">
@@ -54,10 +55,13 @@ b                    <Flex direction="column" mt="10" justifyContent="center" al
                         width="330px" required />
                         </Box>
                        </Flex>
+                       <Flex mb="8" justifyContent="end" mt="8" mr="20">
+  <Button mb="8" color="primary" variant="outline">Login</Button>
+                     </Flex>
                 </FormBox>
 
 
-           </Column>
+           </Column> 
         </AuthLayout>
     )
 }
@@ -80,7 +84,8 @@ export const FormBox = styled.form`
  box-shadow: -50px 50px 25px rgba(0, 0, 0, .08);
  margin-top:50px;
  width: 70%;
- height: 400px;
+
+
 
 `
 
