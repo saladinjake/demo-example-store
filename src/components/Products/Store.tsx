@@ -1,10 +1,12 @@
 import styled from "styled-components"
-import { ProductCard } from "./ProductCard"
+import { ProductCard, ProductSkeleton } from "./ProductCard"
 import Flex from "../UIElements/Flex"
 import Input from "../UIElements/Input"
 import Box from "../UIElements/Box"
-
-
+import { useState, useEffect, useRef, useCallback } from "react"
+import { useSearchInputDebounce } from "../../hooks/useDebounce"
+import { fetchProducts } from "../../api/services/products.api";
+const PRODUCTS_PER_PAGE = 10;
 export const ProductListing = ({ title, subTitle }) => {
      const products = [
         {name:"Rock Town T-shirt", thumbnail:"/images/products/f1.jpg", price:"$22.44", brand:"Rock town"},
@@ -17,6 +19,89 @@ export const ProductListing = ({ title, subTitle }) => {
         {name:"Jessklan T-shirt", thumbnail:"/images/products/f8.jpg", price:"$22.44", brand:"Jess"},
         
     ]
+     //debunce and load more
+    const [allProducts, setAllProducts] = useState([]);
+    const [displayedProducts, setDisplayedProducts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [categoryFilter, setCategoryFilter] = useState("all");
+    const [loading, setLoading] = useState(true);
+    const [page, setPage] = useState(1);
+
+    const debouncedSearchTerm = useSearchInputDebounce(searchTerm, 500);
+
+    const categories = ["all", ...new Set(allProducts.map((p) => p.category))];
+    useEffect(() => {
+        async function load() {
+        setLoading(true);
+        try{
+
+            const products = await fetchProducts();
+            setAllProducts(products ? products : []);
+       
+        }catch(err){
+        
+        }finally {
+
+             setLoading(false);
+        }
+
+    }
+       load()
+      
+    }, []);
+
+    // Filter and search products
+    useEffect(() => {
+        let filtered = allProducts;
+        if (categoryFilter !== "all") {
+          filtered = filtered.filter((p) => p.category === categoryFilter);
+        }
+        if (debouncedSearchTerm) {
+          filtered = filtered.filter((p) =>
+            p.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+        );
+        }
+        setDisplayedProducts(filtered.slice(0, PRODUCTS_PER_PAGE));
+        setPage(1);
+    }, [allProducts, debouncedSearchTerm, categoryFilter]);
+
+    // Lazy load more on scroll
+    const loaderRef = useRef();
+    const loadMore = useCallback(() => {
+        const filtered = allProducts.filter((p) => {
+        if (categoryFilter !== "all" && p.category !== categoryFilter) return false;
+        if (
+            debouncedSearchTerm &&
+            !p.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+        )
+            return false;
+        return true;
+        });
+        const nextPage = page + 1;
+        const newProducts = filtered.slice(0, nextPage * PRODUCTS_PER_PAGE);
+        setDisplayedProducts(newProducts);
+        setPage(nextPage);
+    }, [allProducts, categoryFilter, debouncedSearchTerm, page]);
+
+    useEffect(() => {
+        if (loading) return;
+        const observer = new IntersectionObserver(
+        (entries) => {
+            if (entries[0].isIntersecting) {
+            loadMore();
+            }
+        },
+        {
+            rootMargin: "100px",
+        }
+        );
+        if (loaderRef.current) observer.observe(loaderRef.current);
+        return () => {
+        if (loaderRef.current) observer.unobserve(loaderRef.current);
+        };
+    }, [loadMore, loading]);
+
+
     return (
         <ProductLisingWrapper>
             <Flex justifyContent="between">
@@ -40,19 +125,50 @@ export const ProductListing = ({ title, subTitle }) => {
                 placeholder="search"
                 width="330px"
               />
+
+              <Box ml="4">
+ <select
+          value={categoryFilter}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+          className="border p-2"
+        >
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat[0].toUpperCase() + cat.slice(1)}
+            </option>
+          ))}
+        </select>
+                </Box>
               </Box>
         </Flex>
             <Container>
                 
-         {products.map(item => {
+
+                 {loading
+          ? Array(PRODUCTS_PER_PAGE)
+              .fill(0)
+              .map((_, i) => <ProductSkeleton key={i} />)
+          : displayedProducts.length > 0 ? displayedProducts.map((product) => (
+              <ProductCard key={product.id} price={item.price}
+             name={item.name}
+             brand={item.brand} 
+             imageUrl={item.thumbnail} />
+            )): 
+            
+             products.map(item => {
             return <ProductCard 
              price={item.price}
              name={item.name}
              brand={item.brand} 
              imageUrl={item.thumbnail}
              /> 
-         })}
+         })
+            }
+         
          </Container>
+
+          {/* Loader div for lazy loading */}
+      <div ref={loaderRef}></div>
         </ProductLisingWrapper>
     )
 }

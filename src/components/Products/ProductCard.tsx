@@ -1,4 +1,38 @@
 import styled from "styled-components"
+
+
+import Box from "../../components/UIElements/Box"
+import Skeleton from "../../components/UIElements/Skeleton"
+
+export function ProductSkeleton() {
+  return (
+    <div className="border rounded p-4 shadow animate-pulse">
+      <Skeleton
+       width="22%"
+       height="100px"
+
+       color="#eaeaea"
+      />
+      <Skeleton
+       width="100%"
+       height="10px"
+       color="#eaeaea"
+      />
+
+        <Skeleton
+       width="100%"
+       height="10px"
+       color="#eaeaea"
+      />
+
+        <Skeleton
+       width="100%"
+       height="10px"
+       color="#eaeaea"
+      />
+    </div>
+  );
+}
 export const ProductCard = ({ imageUrl, brand, name,  price }) => {
     return (
          <ProductCardWrapper>

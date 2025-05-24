@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../axios.config";
 
 const LOCAL_STORAGE_KEY = "products";
 

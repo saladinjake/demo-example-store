@@ -1,6 +1,12 @@
 import styled from "styled-components"
 import { ProductCard } from "./ProductCard"
+import { useState, useEffect } from "react"
+import { useSearchInputDebounce } from "../../hooks/useDebounce"
+
+
+
 export const ProductListing = ({ title, subTitle }) => {
+    //fall back when network request fails
      const products = [
         {name:"Rock Town T-shirt", thumbnail:"/images/products/f1.jpg", price:"$22.44", brand:"Rock town"},
         {name:"Cardilac T-shirt", thumbnail:"/images/products/f2.jpg", price:"$22.44", brand:"Mtv"},
@@ -12,6 +18,9 @@ export const ProductListing = ({ title, subTitle }) => {
         {name:"Jessklan T-shirt", thumbnail:"/images/products/f8.jpg", price:"$22.44", brand:"Jess"},
         
     ]
+
+   
+    
     return (
         <ProductLisingWrapper>
              <h2>{title}</h2>
