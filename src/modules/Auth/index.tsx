@@ -6,7 +6,7 @@ import Button from "../../components/UIElements/Button"
 import { useState } from "react"
 import {loginValidations }  from "./validations";
 import useForm, { hasError } from "../../hooks/useForm";
-import { useAuth } from "../../hooks/useAuth"
+import { useAuth } from "../../contexts/useAuth"
 import { useNavigate } from "react-router-dom"
 const SignIn = () => {
 

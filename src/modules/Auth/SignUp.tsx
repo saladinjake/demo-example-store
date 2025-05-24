@@ -7,7 +7,7 @@ import { useState } from "react"
 import { Column, FormBox, AuthLayout}  from "./"
 import {registerValidations }  from "./validations";
 import useForm, { hasError } from "../../hooks/useForm";
-import { useAuth } from "../../hooks/useAuth"
+import { useAuth } from "../../contexts/useAuth"
 import { useNavigate } from "react-router-dom"
 const SignUp = () => {
     const navigate = useNavigate(); 
