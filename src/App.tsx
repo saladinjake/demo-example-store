@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useMode } from './style/ModeProvider';
+import { useMode } from './theme/style/ModeProvider';
 import styled from "styled-components"
 import {RouteOutlets } from "./routes"
 function App() {

@@ -10,7 +10,7 @@ import {
   StyledErrorIcon,
 } from "./Input.styles";
 import { InputProps } from "./Input.types";
-import { Svg } from "../../assets/svg";
+import { Svg } from "../../../assets/svg";
 import Tooltip from "./Tooltip";
 
 const { Error: ErrorIcon } = Svg;

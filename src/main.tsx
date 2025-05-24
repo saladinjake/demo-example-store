@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { ModeProvider } from './style/ModeProvider.tsx'
-import Theme from './style/ThemeWrapper.tsx';
+import { ModeProvider } from './theme/style/ModeProvider.tsx'
+import Theme from './theme';
 import App from './App.tsx'
-import { GlobalStyle } from './style/GlobalStyles.tsx';
+import { GlobalStyles  } from './theme/globalStyles';
 import { BrowserRouter } from "react-router-dom"
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
          <BrowserRouter>
         <App />
         </BrowserRouter>
-        <GlobalStyle />
+        <GlobalStyles />
       </Theme>
     </ModeProvider>
     

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Box } from "kuda-component-library";
+import  Box from "../Box"
 
 export const Label = styled.label`
   font-size: 13.5px;
@@ -29,7 +29,10 @@ export const InputWrapper = styled.input`
 `;
 
 export const RequiredAsterisk = styled(Box)`
-  color: ${({ theme }) => theme.colors.KudaRed || "#F7685B"};
+  color: ${({ theme }) => {
+   
+    return theme.colors.Red || "#F7685B"
+  }};
 `;
 
 export const Error = styled.small`
@@ -37,7 +40,7 @@ export const Error = styled.small`
   align-items: center;
   margin-top: 10px;
   font-size: 12px;
-  color: ${(props) => props.theme.colors.kudaRed};
+  color: ${(props) => props.theme.colors.Red};
 `;
 
 export const StyledErrorIcon = styled.img`

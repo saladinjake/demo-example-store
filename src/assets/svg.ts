@@ -1,7 +1,6 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import KudaNerveLogo from "./img/svg/kuda-nerve.svg?react";
-import KudaKLogo from "./img/svg/kuda-k.svg?react";
+
 import successAnimation from "./img/svg/success-animation.svg";
 import errorAnimation from "./img/svg/error-animation.svg";
 import attentionIcon from "./img/svg/attention-icon.svg";
@@ -36,8 +35,6 @@ import AccountSvg from "./img/svg/account.svg?react";
 import CheckCircleIcon from "./img/svg/check-circle.svg?react";
 
 export const Svg = {
-  KudaNerveLogo,
-  KudaKLogo,
   successAnimation,
   errorAnimation,
   attentionIcon,

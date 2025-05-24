@@ -1,12 +1,59 @@
 import styled from "styled-components"
+import Input from "../../components/UIElements/Input"
+import Flex from "../../components/UIElements/Flex"
+import Box from "../../components/UIElements/Box"
+import { useState } from "react"
 
 const SignIn = () => {
+
+    const [credentials, setCredentials]  = useState({
+      email:"",
+
+      password:""
+
+    })
     return (
         <AuthLayout>
-           <Column>A</Column>
+           <Column>
+                     <Flex direction="column" mt="10" justifyContent="center" alignItems="center">
+           
+                       <Box mt="4">       
+
+                      
+                       </Box>
+                
+           </Flex>
+           </Column>
            <Column>
                <FormBox>
-b
+b                    <Flex direction="column" mt="10" justifyContent="center" alignItems="center">
+                       
+                       <Box mt="4">        <a href="#"><img src="images/logo.png" className="logo" alt="Shop" /></a></Box>
+                       <Box mb="4" mt="4">
+                       <Input
+                        label="Username"
+                        type="text"
+                         value={credentials.email}
+                         placeholder="Johndoe@yourEmail.com"
+                       name="email"
+                        width="330px"
+                        
+                        required
+                        />
+                        </Box>
+
+
+                        
+                       <Box mb="2">
+                       <Input
+                        label="Password"
+                        type="password"
+                         value={credentials.password}
+                         placeholder="****"
+                       name="email"
+                        width="330px" required />
+                        </Box>
+                       </Flex>
                 </FormBox>
 
 
@@ -32,7 +79,7 @@ export const Column =styled.div<{backgroundColor: string}>`
 export const FormBox = styled.form`
  box-shadow: -50px 50px 25px rgba(0, 0, 0, .08);
  margin-top:50px;
- width: 80%;
+ width: 70%;
  height: 400px;
 
 `
