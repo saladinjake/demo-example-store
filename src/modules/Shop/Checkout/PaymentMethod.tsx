@@ -94,7 +94,7 @@ const PaymentComponent = ({ onNext, onPrevious}) => {
           <FaCcPaypal />
         </PaymentOptions>
         <label>
-          <input type="radio" name="payment" onClick={()=> navigate("/cart/checkout/other-payment-methods")}  /> Other payment methods
+          <input type="radio" name="payment" onClick={()=> navigate("/other-payment-method")}  /> Other payment methods
         </label>
       </PaymentMethod>
 

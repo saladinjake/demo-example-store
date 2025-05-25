@@ -1,4 +1,4 @@
-import Grid from "components/Grid";
+import Grid from "../../../components/UIElements/Grid";
 import React, { useState} from "react"
 import styled from "styled-components"
 
