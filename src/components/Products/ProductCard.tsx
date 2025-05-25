@@ -3,6 +3,7 @@ import styled from "styled-components"
 
 import Box from "../../components/UIElements/Box"
 import Skeleton from "../../components/UIElements/Skeleton"
+import { useCart } from "../../contexts/CartDrawerContext";
 
 export function ProductSkeleton() {
   return (
@@ -33,7 +34,10 @@ export function ProductSkeleton() {
     </div>
   );
 }
-export const ProductCard = ({ imageUrl, brand, name,  price }) => {
+export const ProductCard = ({ imageUrl, brand, name,  price }: {
+    imageUrl: string, brand: string, name: string,  price : string | number
+}) => {
+     const { addItem }= useCart()
     return (
          <ProductCardWrapper>
                 <img src={imageUrl} alt="" />
@@ -49,7 +53,12 @@ export const ProductCard = ({ imageUrl, brand, name,  price }) => {
                     </div>
                     <h4>{price}</h4>
                 </div>
-                <a href="#"><i className="fas fa-shopping-cart cart"></i></a>
+                <a href="#" onClick={(e)=>{
+                  e.preventDefault()
+
+                  addItem({ imageUrl, brand, name,  price })
+
+                }}><i className="fas fa-shopping-cart cart"></i></a>
             </ProductCardWrapper>
     )
 }

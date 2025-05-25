@@ -1,5 +1,7 @@
 import styled from "styled-components"
+import { useAuth } from "../contexts/AuthContext"
 export const Header = () => {
+    const { user} = useAuth()
 
     return (
 
@@ -12,6 +14,8 @@ export const Header = () => {
                 <MenuItem><a href="/login">Login</a></MenuItem>
                 <MenuItem><a href="/register">Signup</a></MenuItem>
                 <MenuItem id="lg-bag"><a href="/cart"><i className="far fa-shopping-bag"></i></a></MenuItem>
+
+                {user && <MenuItem id="lg-bag">Welcome back {user.name}</MenuItem>} 
                 <a href="#" id="close"><i className="far fa-times"></i></a>
             </Menu>
         </div>

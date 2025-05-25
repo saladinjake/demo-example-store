@@ -6,7 +6,7 @@ import Button from "../../components/UIElements/Button"
 import { useState } from "react"
 import {loginValidations }  from "./validations";
 import useForm, { hasError } from "../../hooks/useForm";
-import { useAuth } from "../../contexts/useAuth"
+import { useAuth } from "../../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 const SignIn = () => {
 
@@ -29,7 +29,7 @@ const SignIn = () => {
 
 
 
-  const handleSubmit = (e) => {
+  const handleSendToApi = (e: any) => {
     e.preventDefault();
     if (!values.email || !values.password) {
       setError("Email and password required");
@@ -128,7 +128,7 @@ export const AuthLayout = styled.div`
    height: 100vh;
 
 `
-export const Column =styled.div<{backgroundColor: string}>`
+export const Column =styled.div<{backgroundColor?: string}>`
   width:50%;
   background: ${({backgroundColor}) => backgroundColor ? backgroundColor: "#fafafa"}
   display: flex;

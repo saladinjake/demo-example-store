@@ -7,7 +7,7 @@ import { useState } from "react"
 import { Column, FormBox, AuthLayout}  from "./"
 import {registerValidations }  from "./validations";
 import useForm, { hasError } from "../../hooks/useForm";
-import { useAuth } from "../../contexts/useAuth"
+import { useAuth } from "../../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 const SignUp = () => {
     const navigate = useNavigate(); 
@@ -32,7 +32,7 @@ const SignUp = () => {
 
 
     
-  const handleSubmit = (e) => {
+  const handleSendToApi = (e: any) => {
     e.preventDefault();
     if (!values.email || !values.password) {
       setError("Email and password required");
@@ -128,7 +128,7 @@ b                    <Flex direction="column" mt="10" justifyContent="center" al
 
 
         </Flex>
-                       <Flex mb="18" justifyContent="end"  mr="20">
+                       <Flex mb="16" justifyContent="end"  mr="20">
                <Box mb="4"><Button  color="primary" variant="outline">Register</Button></Box>
                      </Flex>
             </FormBox>
