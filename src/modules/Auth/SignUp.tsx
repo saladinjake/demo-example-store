@@ -11,7 +11,7 @@ import { useAuth } from "../../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 const SignUp = () => {
     const navigate = useNavigate(); 
-  const { user,  signup, logout } = useAuth(); 
+  const {  signup  } = useAuth(); 
   const [editable,setEditable] = useState(true)
 
     const [credentials, setCredentials]  = useState({
@@ -43,7 +43,7 @@ const SignUp = () => {
       setError("Password mismatch");
       return;
     }
-     const success = signup(values);
+     const success: any = signup(values);
     
     if (success) {
       navigate("/");
