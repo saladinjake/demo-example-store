@@ -8,6 +8,8 @@ const SignUp = lazy(() => import("../modules/Auth/SignUp"))
 const Shop =  lazy(() => import("../modules/Shop"))
 const Cart  = lazy(() => import("../modules/Shop/Cart"))
 const WishList  = lazy(() => import("../modules/Shop/Wishlist"))
+const CheckoutPage = lazy(()=> import("../modules/Shop/Checkout"))
+const CheckoutAlternative = lazy(()=> import("../modules/Shop/Checkout/OtherPaymentMethods"))
 
 export const RouteOutlets = () => {
 
@@ -21,10 +23,17 @@ export const RouteOutlets = () => {
             path="/cart"
             element={ <Cart/>            }
           />
-
           <Route
             path="/wishlist"
             element={ <WishList/>            }
+          />
+           <Route
+            path="/checkout"
+            element={ <CheckoutPage/>            }
+          />
+           <Route
+            path="/other-payment-method"
+            element={ <CheckoutAlternative/>            }
           />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<SignUp/>} />
