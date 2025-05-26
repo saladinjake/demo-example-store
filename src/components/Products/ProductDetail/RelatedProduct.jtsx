@@ -1,0 +1,90 @@
+import styled from "styled-components";
+const RelatedProductsSection = styled.div`
+  margin-top: 40px;
+`;
+
+const RelatedProductsHeading = styled.h3`
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+`;
+
+const RelatedProductCard = styled.div`
+  display: inline-block;
+  width: 250px;
+  margin-right: 20px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+const RatingSection = styled.div`
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+`;
+
+const RatingStar = styled.span`
+  color: #ffcc00;
+  margin-right: 5px;
+`;
+
+const RatingText = styled.span`
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+const CommentsSection = styled.div`
+  margin-top: 20px;
+`;
+
+const Comment = styled.div`
+  margin-bottom: 15px;
+`;
+
+const CommentText = styled.p`
+  font-size: 14px;
+  color: #555;
+`;
+
+const ProductDetailsRelatedSection = ({ product }) => {
+  return (
+    <>
+      <RelatedProductsSection>
+        <RelatedProductsHeading>Related Products</RelatedProductsHeading>
+        <div>
+          {product.relatedProducts.map((item, index) => (
+            <RelatedProductCard key={index}>
+              <img src={item.image} alt={item.name} />
+              <h4>{item.name}</h4>
+              <p>{item.price}</p>
+            </RelatedProductCard>
+          ))}
+        </div>
+      </RelatedProductsSection>
+
+      <RatingSection>
+        {[...Array(5)].map((_, index) => (
+          <RatingStar key={index}>★</RatingStar>
+        ))}
+        <RatingText>4.5/5</RatingText>
+      </RatingSection>
+
+      <CommentsSection>
+        {product.comments.map((comment, index) => (
+          <Comment key={index}>
+            <strong>{comment.user}</strong>
+            <CommentText>{comment.text}</CommentText>
+          </Comment>
+        ))}
+      </CommentsSection>
+    </>
+  );
+};
+export default ProductDetailsRelatedSection

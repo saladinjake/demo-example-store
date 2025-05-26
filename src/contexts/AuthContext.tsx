@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext({
-  user: {},
+  user: {email:"",password:"",confirmPassword:""},
   login: (data:any) =>{},
   logout:()=>{},
   signup: (data:any) =>{},

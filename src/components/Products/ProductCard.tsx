@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 
 import Box from "../../components/UIElements/Box"
-import Skeleton from "../../components/UIElements/Skeleton"
+import Skeleton from "../UIElements/Skeleton"
 import { useCart } from "../../contexts/CartDrawerContext";
 
 export function ProductSkeleton() {
