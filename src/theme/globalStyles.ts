@@ -11,7 +11,7 @@ html {
     font-family: "Mulish";
     min-height: 100vh;
       font-family: ${(props) => props.theme.font.primary};
-    font-size: 1.6rem;
+    font-size: 12px;
    
   }
 
