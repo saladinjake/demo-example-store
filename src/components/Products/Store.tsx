@@ -8,15 +8,15 @@ import { useSearchInputDebounce } from "../../hooks/useDebounce"
 import { fetchProducts } from "../../api/services/products.api";
 const PRODUCTS_PER_PAGE = 10;
 export const ProductListing = ({ title, subTitle }) => {
-     const products = [
-        {name:"Rock Town T-shirt", thumbnail:"/images/products/f1.jpg", price:"$22.44", brand:"Rock town"},
-        {name:"Cardilac T-shirt", thumbnail:"/images/products/f2.jpg", price:"$22.44", brand:"Mtv"},
-        {name:"Rosewell T-shirt", thumbnail:"/images/products/f3.jpg", price:"$22.44", brand:"Roswell"},
-        {name:"Bonjo T-shirt", thumbnail:"/images/products/f4.jpg", price:"$22.44", brand:"Bonjo"},
-        {name:"Dior T-shirt", thumbnail:"/images/products/f5.jpg", price:"$22.44", brand:"Dior"},
-        {name:"Sven T-shirt", thumbnail:"/images/products/f6.jpg", price:"$22.44", brand:"Sven"},
-        {name:"Resses T-shirt", thumbnail:"/images/products/f7.jpg", price:"$22.44", brand:"Resses"},
-        {name:"Jessklan T-shirt", thumbnail:"/images/products/f8.jpg", price:"$22.44", brand:"Jess"},
+     const products =[
+        {description:"Sample Description",name:"Rock Town T-shirt", thumbnail:"/images/products/f1.jpg", price:"$22.44", brand:"Rock town"},
+        {description:"Sample Description",name:"Cardilac T-shirt", thumbnail:"/images/products/f2.jpg", price:"$22.44", brand:"Mtv"},
+        {description:"Sample Description",name:"Rosewell T-shirt", thumbnail:"/images/products/f3.jpg", price:"$22.44", brand:"Roswell"},
+        {description:"Sample Description",name:"Bonjo T-shirt", thumbnail:"/images/products/f4.jpg", price:"$22.44", brand:"Bonjo"},
+        {description:"Sample Description",name:"Dior T-shirt", thumbnail:"/images/products/f5.jpg", price:"$22.44", brand:"Dior"},
+        {description:"Sample Description",name:"Sven T-shirt", thumbnail:"/images/products/f6.jpg", price:"$22.44", brand:"Sven"},
+        {description:"Sample Description",name:"Resses T-shirt", thumbnail:"/images/products/f7.jpg", price:"$22.44", brand:"Resses"},
+        {description:"Sample Description",name:"Jessklan T-shirt", thumbnail:"/images/products/f8.jpg", price:"$22.44", brand:"Jess"},
         
     ]
      //debunce and load more
@@ -29,13 +29,13 @@ export const ProductListing = ({ title, subTitle }) => {
 
     const debouncedSearchTerm = useSearchInputDebounce(searchTerm, 500);
 
-    const categories = ["all", ...new Set(allProducts.map((p) => p.category))];
+    const categories = ["all", ...new Set(allProducts.map((p: any) => p.brand))];
     useEffect(() => {
         async function load() {
         setLoading(true);
         try{
 
-            const products = await fetchProducts();
+            const products: any = await fetchProducts();
             setAllProducts(products ? products : []);
        
         }catch(err){
@@ -54,11 +54,11 @@ export const ProductListing = ({ title, subTitle }) => {
     useEffect(() => {
         let filtered = allProducts;
         if (categoryFilter !== "all") {
-          filtered = filtered.filter((p) => p.category === categoryFilter);
+          filtered = filtered.filter((p: any) => p.brand === categoryFilter);
         }
         if (debouncedSearchTerm) {
           filtered = filtered.filter((p) =>
-            p.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+            p.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
         );
         }
         setDisplayedProducts(filtered.slice(0, PRODUCTS_PER_PAGE));
@@ -68,11 +68,11 @@ export const ProductListing = ({ title, subTitle }) => {
     // Lazy load more on scroll
     const loaderRef = useRef();
     const loadMore = useCallback(() => {
-        const filtered = allProducts.filter((p) => {
-        if (categoryFilter !== "all" && p.category !== categoryFilter) return false;
+        const filtered = allProducts.filter((p: any) => {
+        if (categoryFilter !== "all" && p.brand !== categoryFilter) return false;
         if (
             debouncedSearchTerm &&
-            !p.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+            !p.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
         )
             return false;
         return true;
@@ -147,8 +147,8 @@ export const ProductListing = ({ title, subTitle }) => {
           ? Array(PRODUCTS_PER_PAGE)
               .fill(0)
               .map((_, i) => <ProductSkeleton key={i} />)
-          : displayedProducts.length > 0 ? displayedProducts.map((product) => (
-              <ProductCard key={product.id} price={item.price}
+          : displayedProducts.length > 0 ? displayedProducts.map((item: any) => (
+              <ProductCard key={item.name} price={item.price}
              name={item.name}
              brand={item.brand} 
              imageUrl={item.thumbnail} />

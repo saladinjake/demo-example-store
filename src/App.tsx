@@ -1,6 +1,5 @@
-import { useState } from 'react';
+
 import { useMode } from './theme/style/ModeProvider';
-import styled from "styled-components"
 import {RouteOutlets } from "./routes"
 function App() {
   const [mode, setMode] = useMode();

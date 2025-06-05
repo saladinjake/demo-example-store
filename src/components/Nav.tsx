@@ -1,12 +1,14 @@
 import styled from "styled-components"
 import { useAuth } from "../contexts/AuthContext"
+import { MobileNav } from "./NavMobile"
 export const Header = () => {
     const { user} = useAuth()
 
     return (
 
      <HeaderWraper>
-        <a href="#"><img src="images/logo.png" className="logo" alt="Shop" /></a>
+        
+        <a href="./"><img src="images/logo.png" className="logo" alt="Shop" /></a>
         <div>
             <Menu>
                 <MenuItem><a className="active" href="/">Home</a></MenuItem>
