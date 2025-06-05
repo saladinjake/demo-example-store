@@ -5,6 +5,7 @@ import {Footer } from "../../components/Footer"
 import { ProductListing } from "../../components/Products/Store"
 import { OffSalesDiscountBanner } from "../../components/BannerOffSales"
 import { NewsLetterSection } from "../../components/Newsletter"
+import { NewArrivalsListPage } from "./newArrivals"
 
 const HomeModule =  () => {
      
@@ -12,6 +13,7 @@ const HomeModule =  () => {
    <Fragment>
       
       <BannerAdsSales/>
+      <NewArrivalsListPage/>
       <ProductListing title="Featured Products " subTitle="T-shirts Collection For Men"/>
       <OffSalesDiscountBanner/>
       <NewsLetterSection/>
