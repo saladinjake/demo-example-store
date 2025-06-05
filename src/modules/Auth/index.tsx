@@ -29,19 +29,24 @@ const SignIn = () => {
 
 
 
-  const handleSendToApi = () => {
+  const handleSendToApi =async () => {
 
     if (!values.email || !values.password) {
       setError("Email and password required");
       return;
     }
 
-    const success: any = login(values);
+   
+    setError(null);
+    // setLoading(true);
+
+    const success = await login(values.email, values.password);
+    // setLoading(false);
 
     if (success) {
-      navigate("/");
+      navigate('/dashboard');
     } else {
-      setError("Login failed");
+      setError('Invalid username or password');
     }
   };
 

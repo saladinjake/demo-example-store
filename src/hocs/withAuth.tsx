@@ -1,21 +1,26 @@
+import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { Navigate } from 'react-router-dom';
 
-export function withAuth<P,any>(
-  WrappedComponent: any,
-  options: any
+type Role = 'user' | 'admin' | 'vendor';
+
+interface WithAuthOptions {
+  allowedRoles: Role[];
+  fallback?: React.ReactNode;
+}
+
+export function withAuth(
+  WrappedComponent: React.ComponentType,
+  options: WithAuthOptions
 ) {
   return (props: P) => {
-    const { user, loading } = useAuth();
-
-    if (loading) return <p>Loading...</p>;
+    const { user } = useAuth();
 
     if (!user) {
-      return <Navigate to="/login" replace />;
+      return <p>Please login to view this page.</p>;
     }
 
     if (!options.allowedRoles.includes(user.role)) {
-      return options.fallback || <p>Access denied.</p>;
+      return options.fallback || <p>Access denied. You do not have permission.</p>;
     }
 
     return <WrappedComponent {...props} />;
