@@ -4,47 +4,47 @@ import Flex from "../../components/UIElements/Flex"
 import Box from "../../components/UIElements/Box"
 import Button from "../../components/UIElements/Button"
 import { useState } from "react"
-import { Column, FormBox, AuthLayout}  from "./"
-import {registerValidations }  from "./validations";
+
+import { registerValidations } from "./validations";
 import useForm, { hasError } from "../../hooks/useForm";
 import { useAuth } from "../../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 const SignUp = () => {
-    const navigate = useNavigate(); 
-  const {  signup  } = useAuth(); 
-  const [editable,setEditable] = useState(true)
+  const navigate = useNavigate();
+  const { signup } = useAuth();
+  const [editable, setEditable] = useState(true)
 
-    const [credentials, setCredentials]  = useState({
-      email:"",
-      confirmPassword:"",
-      password:""
+  const [credentials, setCredentials] = useState({
+    email: "",
+    confirmPassword: "",
+    password: ""
 
-    })
-  
-   const [error, setError] = useState("");    
+  })
 
-    const { values, handleChange, handleSubmit, errors, touched, invalid } =
+  const [error, setError] = useState("");
+
+  const { values, handleChange, handleSubmit, errors, touched, invalid } =
     useForm({
       initialValues: credentials,
       validations: registerValidations,
-      onSubmit() {},
+      onSubmit() { },
     });
 
 
-    
+
   const handleSendToApi = (e: any) => {
     e.preventDefault();
     if (!values.email || !values.password) {
       setError("Email and password required");
       return;
     }
-    
-    if (values.password && values.confirmPassword &&  (values.password !==values.confirmPassword)) {
+
+    if (values.password && values.confirmPassword && (values.password !== values.confirmPassword)) {
       setError("Password mismatch");
       return;
     }
-     const success: any = signup(values);
-    
+    const success: any = signup(values);
+
     if (success) {
       navigate("/");
     } else {
@@ -52,43 +52,40 @@ const SignUp = () => {
     }
   };
 
-    return (
-        <AuthLayout>
-           <Column>
-                     <Flex direction="column" mt="10" justifyContent="center" alignItems="center">
-           
-                       <Box mt="4">       
+  return (
+    <Container>
+      <LeftColumn>
+        {/* <h1>Left Side Content</h1> */}
+      </LeftColumn>
 
-                      
-                       </Box>
-                
-           </Flex>
-           </Column>
-           <Column>
-               <FormBox>
-b                    <Flex direction="column" mt="10" justifyContent="center" alignItems="center">
-                       
-                       <Box mt="4">        <a href="#"><img src="images/logo.png" className="logo" alt="Shop" /></a></Box>
-                    <Box mb="4" mt="4">
-                        <Input
-                required
-                label="Email"
-                isLoading={false}
-                disabled={!editable}
-                name="email"
-                value={values?.email}
-                onChangePure={handleChange}
-                error={hasError("email", touched, errors)}
-                message={hasError("email", touched, errors)}
-                placeholder="Enter Email"
-                width="330px"
-              />
-                        </Box>
+      <RightColumn>
+        <FormCard>
+          <Title>Sign Up</Title>
+          <form>
+            <Input
+              required
+              label="Email"
+              isLoading={false}
+              disabled={!editable}
+              name="email"
+              value={values?.email}
+              onChangePure={handleChange}
+              error={hasError("email", touched, errors)}
+              message={hasError("email", touched, errors)}
+              placeholder="Enter Email"
+              width="100%"
+            />
+
+            <Box py="4">
 
 
-                        
-                       <Box mb="2">
-                        <Input
+
+
+
+
+
+
+              <Input
                 required
                 label="Password"
                 isLoading={false}
@@ -100,43 +97,92 @@ b                    <Flex direction="column" mt="10" justifyContent="center" al
                 error={hasError("password", touched, errors)}
                 message={hasError("password", touched, errors)}
                 placeholder="************"
-                width="330px"
+                width="100%"
               />
-                        </Box>
-                                       <Box mb="2">
-                        <Input
+            </Box>
+
+
+            <Box py="4">
+              <Input
                 required
                 label="Confirm Password"
                 isLoading={false}
                 disabled={!editable}
-                name="confirmPassword"
+                name="password"
                 type="password"
                 value={values?.password}
                 onChangePure={handleChange}
                 error={hasError("confirmPassword", touched, errors)}
                 message={hasError("confirmPassword", touched, errors)}
                 placeholder="************"
-                width="330px"
-              />
-                        </Box>
+                width="100%"
+              /></Box>
+            <Box py="4">
+              <Button type="submit" width="100%" color="primary" variant="outline">Sign Up</Button>
 
-
-                </Flex>
-   <Flex ml="16" justifyContent="between" mr="6">
-                        <p>
-        {"Already have an account?"}{" "}</p>
-
-
-        </Flex>
-                       <Flex mb="16" justifyContent="end"  mr="20">
-               <Box mb="4"><Button  color="primary" variant="outline">Register</Button></Box>
-                     </Flex>
-            </FormBox>
-
-
-           </Column>
-        </AuthLayout>
-    )
+            </Box>
+          </form>
+        </FormCard>
+      </RightColumn>
+    </Container>
+  )
 }
 
 export default SignUp
+
+
+
+
+
+
+
+
+
+// Container: flex row on large, column on small
+const Container = styled.div`
+  display: flex;
+  min-height: 100vh;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+`;
+
+// Left column hidden on small screens
+const LeftColumn = styled.div`
+  flex: 1;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
+
+// Right column always visible, full width on small
+const RightColumn = styled.div`
+  flex: 1;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+`;
+
+// Form Card styling
+const FormCard = styled.div`
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 8px;
+`;
+
+const Title = styled.h2`
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+`;

@@ -30,7 +30,7 @@ const SignIn = () => {
 
 
   const handleSendToApi = () => {
-  
+
     if (!values.email || !values.password) {
       setError("Email and password required");
       return;
@@ -50,39 +50,45 @@ const SignIn = () => {
       <FormCard>
         <Title>Login</Title>
         <form>
-         <Input
-                required
-                label="Email"
-                isLoading={false}
-                disabled={!editable}
-                name="email"
-                value={values?.email}
-                onChangePure={handleChange}
-                error={hasError("email", touched, errors)}
-                message={hasError("email", touched, errors)}
-                placeholder="Enter Email"
-                width="330px"
-              />
-                 <Input
-                required
-                label="Password"
-                isLoading={false}
-                disabled={!editable}
-                name="password"
-                type="password"
-                value={values?.password}
-                onChangePure={handleChange}
-                error={hasError("password", touched, errors)}
-                message={hasError("password", touched, errors)}
-                placeholder="************"
-                width="330px"
-              />
-          <ForgotPassword href="#">Forgot password?</ForgotPassword>
-          <Box  py="4">
-            <Button type="submit" width="100%" color="primary" variant="outline">Sign In</Button>
-        
+          <Box py="4">
+            <Input
+              required
+              label="Email"
+              isLoading={false}
+              disabled={!editable}
+              name="email"
+              value={values?.email}
+              onChangePure={handleChange}
+              error={hasError("email", touched, errors)}
+              message={hasError("email", touched, errors)}
+              placeholder="Enter Email"
+              width="100%"
+            />
+
           </Box>
-          </form>
+          <Box py="4">
+            <Input
+              required
+              label="Password"
+              isLoading={false}
+              disabled={!editable}
+              name="password"
+              type="password"
+              value={values?.password}
+              onChangePure={handleChange}
+              error={hasError("password", touched, errors)}
+              message={hasError("password", touched, errors)}
+              placeholder="************"
+              width="100%"
+            />
+          </Box>
+
+          <ForgotPassword href="#">Forgot password?</ForgotPassword>
+          <Box py="4">
+            <Button type="submit" width="100%" color="primary" variant="outline">Sign In</Button>
+
+          </Box>
+        </form>
         <SocialButtons>
           <GoogleButton>
             <GoogleIcon />
@@ -97,7 +103,7 @@ const SignIn = () => {
     </Container>
 
 
-    
+
   )
 }
 
