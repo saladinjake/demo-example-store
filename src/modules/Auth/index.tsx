@@ -14,7 +14,7 @@ const SignIn = () => {
   const { login, loading } = useAuth();
   const [editable, setEditable] = useState(true)
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string|null>("");
   const [credentials, setCredentials] = useState({
     email: "",
     password: ""
