@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 
-import Box from "../../components/UIElements/Box"
+
 import Skeleton from "../UIElements/Skeleton"
 import { useCart } from "../../contexts/CartDrawerContext";
 
