@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"
 const SignIn = () => {
 
   const navigate = useNavigate();
-  const { login, } = useAuth();
+  const { login, loading } = useAuth();
   const [editable, setEditable] = useState(true)
 
   const [error, setError] = useState("");
@@ -90,7 +90,10 @@ const SignIn = () => {
 
           <ForgotPassword href="#">Forgot password?</ForgotPassword>
           <Box py="4">
-            <Button type="submit" width="100%" color="primary" variant="outline">Sign In</Button>
+            <Button type="submit" width="100%" color="primary"
+             disabled={invalid}
+             loading={loading}
+            variant="outline">  {loading ? 'Logging in...' : 'Login'}</Button>
 
           </Box>
         </form>

@@ -3,7 +3,7 @@ import React, { createContext, useContext, ReactNode, useEffect, useState } from
 type User = {
   id: string;
   name: string;
-  role: 'user' | 'admin' | 'driver';
+  role: 'user' | 'admin' | 'vendor';
 };
 
 type AuthContextType = {
