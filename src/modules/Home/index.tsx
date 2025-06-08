@@ -4,15 +4,17 @@ import { BannerAdsSales } from "../../components/BannerFlashSales"
 import {Footer } from "../../components/Footer"
 import { ProductListing } from "../../components/Products/ProductList"
 import { OffSalesDiscountBanner } from "../../components/BannerOffSales"
-import { NewsLetterSection } from "../../components/Newsletter"
+import { NewsLetterSection } from "../../components/NewsLetter"
+import { NewArrivalsListPage } from "./newArrivals"
 const HomeModule =  () => {
     return (
    <Fragment>
       <HeroBanner/>
 
       <BannerAdsSales/>
-      <ProductListing title="Featured Products " subTitle="T-shirts Collection For Men"/>
-      <OffSalesDiscountBanner/>
+      
+     <NewArrivalsListPage title="New Products " subTitle="T-shirts Collection For Men"/>
+     <OffSalesDiscountBanner/>
       <NewsLetterSection/>
       <Footer/>
 

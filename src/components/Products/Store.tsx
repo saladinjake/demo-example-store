@@ -9,10 +9,14 @@ import { fetchProducts } from "../../api/services/products.api";
 import { ReactNode } from "react"
 
 
+interface IList {
+  title: string;
+  subTitle: string
+}
 
 
 const PRODUCTS_PER_PAGE = 10;
-export const ProductListing = ({ title, subTitle }) => {
+export const ProductListing = ({ title, subTitle }: IList) => {
 
   const products = [
     { description: "Sample Description", name: "Rock Town T-shirt", thumbnail: "/images/products/f1.jpg", price: "$22.44", brand: "Rock town" },
@@ -113,20 +117,10 @@ export const ProductListing = ({ title, subTitle }) => {
 
         </Box>
 
-        <Box>
-          <Input
-            required
-            label="Search"
-            isLoading={false}
-            name="password"
-            placeholder="Search products..."
-            value={searchTerm}
-            onChange={(e: any) => setSearchTerm(e.target.value)}
+        <Flex justifyContent="between">
 
-            width="330px"
-          />
 
-          <Box ml="4">
+          <Box mr="8" width="100px">
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
@@ -139,7 +133,18 @@ export const ProductListing = ({ title, subTitle }) => {
               ))}
             </select>
           </Box>
-        </Box>
+          <Input
+            required
+            label="Search"
+            isLoading={false}
+            name="password"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={(e: any) => setSearchTerm(e.target.value)}
+
+            width="300px"
+          />
+        </Flex>
       </Flex>
       <Container>
 
@@ -176,6 +181,11 @@ export const ProductListing = ({ title, subTitle }) => {
 const ProductLisingWrapper = styled.section`
     text-align: left;
      padding: 40px 80px;
+     & select{
+       padding: 13px;
+       margin-top:30px;
+       border: 1px solid #fafafa;
+     }
 `
 const Container = styled.div`
      display: flex;

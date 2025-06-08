@@ -19,13 +19,13 @@ function ProductGrid({ children , filter, setFilter}: ProductGridProps) {
   return (
     <>
  <Flex justifyContent='end'>
-   <input
+   <SearchBox
           type="text"
           placeholder="Search products..."
           value={filter}
           name="filter"
           onChange={(e: any) => setFilter(e.target.value)}
-          className="mb-4 p-2 border rounded w-full max-w-sm"
+        
         />
  </Flex>
       <Flex direction='row' gap="10px 20px" my="10" mx="16">
@@ -110,5 +110,12 @@ const ProductCardWrapper = styled.div`
     bottom: 20px;
     right: 10px;
 }
+
+`
+const SearchBox =styled.input`
+padding: 10px;
+width:100%;
+
+max-width:330px;
 
 `

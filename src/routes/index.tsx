@@ -2,6 +2,7 @@ import { Routes, Route, Link,  } from "react-router-dom";
 import { Header } from "../components/Nav"
 import { lazy } from "react"
 import { PrivateRoute } from "./Private" 
+import ForgotPasswordForm from "../modules/Auth/ForgotPassword";
 const HomePageModule = lazy(() => import("../modules/Home"))
 const Login = lazy(() => import("../modules/Auth"))
 const SignUp = lazy(() => import("../modules/Auth/SignUp"))
@@ -40,6 +41,7 @@ export const RouteOutlets = () => {
           />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<SignUp/>} />
+            <Route path="/forgot-psssword" element={<ForgotPasswordForm/>} />
         </Routes>
 
         </>

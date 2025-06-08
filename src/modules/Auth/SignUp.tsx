@@ -3,7 +3,7 @@ import Input from "../../components/UIElements/Input"
 import Flex from "../../components/UIElements/Flex"
 import Box from "../../components/UIElements/Box"
 import Button from "../../components/UIElements/Button"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { registerValidations } from "./validations";
 import useForm, { hasError } from "../../hooks/useForm";
@@ -11,7 +11,7 @@ import { useAuth } from "../../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 const SignUp = () => {
   const navigate = useNavigate();
-  const { signup } = useAuth();
+  const { signup, user } = useAuth();
   const [editable, setEditable] = useState(true)
 
   const [credentials, setCredentials] = useState({
@@ -20,6 +20,10 @@ const SignUp = () => {
     password: ""
 
   })
+   useEffect(()=>{
+  
+      if(user) navigate("/")
+    },[user])
 
   const [error, setError] = useState("");
 
@@ -32,7 +36,7 @@ const SignUp = () => {
 
 
 
-  const handleSendToApi = (e: any) => {
+  const handleSendToApi = async (e: any) => {
     e.preventDefault();
     if (!values.email || !values.password) {
       setError("Email and password required");
@@ -43,7 +47,7 @@ const SignUp = () => {
       setError("Password mismatch");
       return;
     }
-    const success: any = signup(values);
+    const success: any = await signup(values.email, values.password);
 
     if (success) {
       navigate("/");

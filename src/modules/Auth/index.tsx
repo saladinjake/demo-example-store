@@ -3,7 +3,7 @@ import Input from "../../components/UIElements/Input"
 import Flex from "../../components/UIElements/Flex"
 import Box from "../../components/UIElements/Box"
 import Button from "../../components/UIElements/Button"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { loginValidations } from "./validations";
 import useForm, { hasError } from "../../hooks/useForm";
 import { useAuth } from "../../contexts/AuthContext"
@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"
 const SignIn = () => {
 
   const navigate = useNavigate();
-  const { login, loading } = useAuth();
+  const { login, loading, user } = useAuth();
   const [editable, setEditable] = useState(true)
 
   const [error, setError] = useState<string|null>("");
@@ -19,6 +19,11 @@ const SignIn = () => {
     email: "",
     password: ""
   })
+
+  useEffect(()=>{
+
+    if(user) navigate("/")
+  },[user])
 
   const { values, handleChange, errors, touched, invalid } =
     useForm({
@@ -89,7 +94,7 @@ const SignIn = () => {
             />
           </Box>
 
-          <ForgotPassword href="#">Forgot password?</ForgotPassword>
+          <ForgotPassword href="/forgot-psssword">Forgot password?</ForgotPassword>
           <Box py="4">
             <Button onClick={handleSendToApi} type="submit" width="100%" color="primary"
              disabled={invalid}
@@ -97,7 +102,7 @@ const SignIn = () => {
             variant="outline">  {loading ? 'Logging in...' : 'Login'}</Button>
 
           </Box>
-        <SocialButtons>
+        {/* <SocialButtons>
           <GoogleButton>
             <GoogleIcon />
             Google
@@ -106,7 +111,7 @@ const SignIn = () => {
             <FacebookIcon />
             Facebook
           </FacebookButton>
-        </SocialButtons>
+        </SocialButtons> */}
       </FormCard>
     </Container>
 

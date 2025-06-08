@@ -17,10 +17,20 @@ export const Header = () => {
                     <MenuItem><a href="/register">Signup</a></MenuItem>
                     <MenuItem id="lg-bag"><a href="/cart"><i className="far fa-shopping-bag"></i></a></MenuItem>
 
-                    {user && <MenuItem id="lg-bag">Welcome back   <div className="avatar avatar-md">
-                        <img src="..." />
-                        <span className="badge status online"></span>
-                    </div></MenuItem>
+                    {user && <MenuItem id="lg-bag">
+                        <button className="dropdown-button">
+                            <div className="avatar avatar-md">
+                                <img src="..." className="dropdown-standalone" />
+                                <span className="badge status online"></span>
+                            </div>
+                        </button>
+                        <ul className="dropdown-list">
+                            <li><a href="#">My Cart</a></li>
+                            <li><a href="#">My Wishlists</a></li>
+                            <li><a href="#">My Orders</a></li>
+                             <li><a href="#">Logout</a></li>
+                        </ul>
+                    </MenuItem>
 
                     }
                     <a href="#" id="close"><i className="far fa-times"></i></a>
@@ -36,9 +46,9 @@ export const Header = () => {
                     <label className="close-btn">&times;</label>
                     <nav className="drawer-menu">
                         <a href="#">Home</a>
-                        <a href="#">Services</a>
-                        <a href="#">Portfolio</a>
-                        <a href="#">Contact</a>
+                        <a href="#">Shop</a>
+                        <a href="#">Login</a>
+                        <a href="#">Sign Up</a>
                     </nav>
                 </div>
 
@@ -197,6 +207,64 @@ const HeaderWraper = styled.section`
   border: 2px solid white;
 }
 
+
+
+
+
+
+
+.dropdown-standalone {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-button {
+  padding: 1px;
+  background: #fff;
+  color: #fff;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+
+
+
+
+.dropdown-list {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  display: none;
+  z-index: 10;
+  min-width: 160px;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.dropdown-list li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #111827;
+  text-decoration: none;
+}
+
+.dropdown-list li a:hover {
+  background: #f3f4f6;
+}
+
+.dropdown-standalone:hover .dropdown-list {
+  display: block;
+}
+
+
+.dropdown-button:focus + .dropdown-list {
+  display: block;
+}
 
 `
 
