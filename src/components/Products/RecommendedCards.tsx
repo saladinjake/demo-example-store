@@ -13,19 +13,19 @@ const ProductContext = createContext<Product | null>(null);
 export function ProductCard({ product, children }: { product: Product; children: ReactNode }) {
   return (
     <ProductContext.Provider value={product}>
-      <div className="border p-4 rounded-md shadow-sm">{children}</div>
+      <div className="">{children}</div>
     </ProductContext.Provider>
   );
 }
 
 ProductCard.Image = function Image() {
   const product = useContext(ProductContext)!;
-  return <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded" />;
+  return <img src={product.image} alt={product.name} className=" object-cover rounded" />;
 };
 
 ProductCard.Title = function Title() {
   const product = useContext(ProductContext)!;
-  return <h2 className="text-lg font-bold mt-2">{product.name}</h2>;
+  return <h2 className=" mt-2">{product.name}</h2>;
 };
 
 ProductCard.Description = function Description() {

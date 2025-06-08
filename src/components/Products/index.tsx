@@ -4,10 +4,16 @@ import { ProductProvider, useProductContext, Product } from '../../contexts/NewA
 
 // Mock products (load this from localStorage or API in real app)
 const MOCK_PRODUCTS: Product[] = [
-  { id: '1', name: 'Laptop', price: 1200, description: 'A fast laptop', thumbnail: '/img/laptop.png', brand: 'electronics' },
-  { id: '2', name: 'Sneakers', price: 150, description: 'Comfort shoes', thumbnail: '/img/sneakers.png', brand: 'fashion' },
-  // more products...
-];
+  { id: 1, description: "Sample Description", name: "Rock Town T-shirt", thumbnail: "/images/products/f1.jpg", price: "$22.44", brand: "Rock town" },
+  { id: 2, description: "Sample Description", name: "Cardilac T-shirt", thumbnail: "/images/products/f2.jpg", price: "$22.44", brand: "Mtv" },
+  { id: 3, description: "Sample Description", name: "Rosewell T-shirt", thumbnail: "/images/products/f3.jpg", price: "$22.44", brand: "Roswell" },
+  { id: 4, description: "Sample Description", name: "Bonjo T-shirt", thumbnail: "/images/products/f4.jpg", price: "$22.44", brand: "Bonjo" },
+  { id: 5, description: "Sample Description", name: "Dior T-shirt", thumbnail: "/images/products/f5.jpg", price: "$22.44", brand: "Dior" },
+  { id: 6, description: "Sample Description", name: "Sven T-shirt", thumbnail: "/images/products/f6.jpg", price: "$22.44", brand: "Sven" },
+  { id: 7, description: "Sample Description", name: "Resses T-shirt", thumbnail: "/images/products/f7.jpg", price: "$22.44", brand: "Resses" },
+  { id: 8, description: "Sample Description", name: "Jessklan T-shirt", thumbnail: "/images/products/f8.jpg", price: "$22.44", brand: "Jess" },
+
+]
 
 function ProductsListInner() {
   const { filter, setFilter, products, setProducts } = useProductContext();
@@ -32,7 +38,7 @@ function ProductsListInner() {
         className="mb-4 p-2 border rounded w-full max-w-sm"
       />
 
-      <ProductGrid>
+      <ProductGrid filter={filter} setFilter={setFilter}>
         {filtered.map((product) => (
           <ProductGrid.Item key={product.id} product={product}>
             {(product) => (

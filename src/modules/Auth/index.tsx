@@ -34,8 +34,8 @@ const SignIn = () => {
 
 
 
-  const handleSendToApi =async (e) => {
-    e.preventDefault()
+  const handleSendToApi =async () => {
+   // e.preventDefault()
 
     if (!values.email || !values.password) {
       setError("Email and password required");

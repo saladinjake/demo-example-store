@@ -1,45 +1,21 @@
 import styled from "styled-components"
-
-
-
-import Skeleton from "../UIElements/Skeleton"
 import { useCart } from "../../contexts/CartDrawerContext";
+import { useNavigate } from "react-router-dom";
 
 export function ProductSkeleton() {
   return (
-    <div className="border rounded p-4 shadow animate-pulse">
-      <Skeleton
-       width="22%"
-       height="100px"
-
-       color="#eaeaea"
-      />
-      <Skeleton
-       width="100%"
-       height="10px"
-       color="#eaeaea"
-      />
-
-        <Skeleton
-       width="100%"
-       height="10px"
-       color="#eaeaea"
-      />
-
-        <Skeleton
-       width="100%"
-       height="10px"
-       color="#eaeaea"
-      />
+    <div className="">
+     
     </div>
   );
 }
-export const ProductCard = ({ imageUrl, brand, name,  price }: {
-    imageUrl: string, brand: string, name: string,  price : string | number
+export const ProductCard = ({ imageUrl, brand, name,  price, id }: {
+    imageUrl: string, brand: string, name: string,  price : string | number, id: string | number
 }) => {
      const { addItem }= useCart()
+     const navigate = useNavigate()
     return (
-         <ProductCardWrapper>
+         <ProductCardWrapper onClick={()=> navigate(`/products-explorer/${id}`)}>
                 <img src={imageUrl} alt="" />
                 <div className="detailInformation">
                     <span>{brand}</span>

@@ -25,10 +25,12 @@ export const Header = () => {
                             </div>
                         </button>
                         <ul className="dropdown-list">
-                            <li><a href="#">My Cart</a></li>
-                            <li><a href="#">My Wishlists</a></li>
-                            <li><a href="#">My Orders</a></li>
-                             <li><a href="#">Logout</a></li>
+                            <li><a href="/cart">Welcome Back {user?.name}</a></li>
+
+                            <li><a href="/cart">My Cart</a></li>
+                            <li><a href="/wishlist">My Wishlists</a></li>
+                            <li><a href="/orders">My Orders</a></li>
+                            <li><a href="#">Logout</a></li>
                         </ul>
                     </MenuItem>
 
@@ -216,6 +218,7 @@ const HeaderWraper = styled.section`
 .dropdown-standalone {
   position: relative;
   display: inline-block;
+
 }
 
 .dropdown-button {
@@ -225,7 +228,9 @@ const HeaderWraper = styled.section`
   border: none;
   border-radius: 0.375rem;
   cursor: pointer;
-}
+  font-size: 12px;
+  font-weight: normal
+  }
 
 
 
@@ -251,7 +256,9 @@ const HeaderWraper = styled.section`
   padding: 0.5rem 1rem;
   color: #111827;
   text-decoration: none;
-}
+  font-size: 12px;
+  font-weight: normal
+  }
 
 .dropdown-list li a:hover {
   background: #f3f4f6;
@@ -286,7 +293,7 @@ const MenuItem = styled.li`
 &   a {
     text-decoration: none;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 200;
     color: #1a1a1a;
     transition: 0.3s ease; 
 }

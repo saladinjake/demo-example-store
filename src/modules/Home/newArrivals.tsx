@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import ProductGrid from '../../components/Products/NewArrivals';
 import { ProductProvider, useProductContext, Product } from '../../contexts/NewArrivalProductContext';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 const MOCK_PRODUCTS: Product[] = [
   { id: 1, description: "Sample Description", name: "Rock Town T-shirt", thumbnail: "/images/products/f1.jpg", price: "$22.44", brand: "Rock town" },
   { id: 2, description: "Sample Description", name: "Cardilac T-shirt", thumbnail: "/images/products/f2.jpg", price: "$22.44", brand: "Mtv" },
@@ -16,7 +17,7 @@ const MOCK_PRODUCTS: Product[] = [
 
 function NewArrivalsProductsSection({ title, subTitle }: { title: string; subTitle: string }) {
   const { filter, setFilter, products, setProducts } = useProductContext();
-
+const navigate = useNavigate()
   useEffect(() => {
     // Load products from mock data or localStorage:
     setProducts(MOCK_PRODUCTS);
@@ -26,6 +27,8 @@ function NewArrivalsProductsSection({ title, subTitle }: { title: string; subTit
   const filtered = products.filter((p) =>
     p.name.toLowerCase().includes(filter.toLowerCase())
   );
+
+  
 
   return (
     <>
@@ -39,7 +42,7 @@ function NewArrivalsProductsSection({ title, subTitle }: { title: string; subTit
               <Container>          {filtered.map((product) => (
             <ProductGrid.Item key={product.id} product={product}>
               {(product) => (
-                <>
+                <div onClick={() => navigate(`/products-explorer/${product.id}`)}>
                   <img src={product.thumbnail} alt={product.name} className="" />
 
                   <div className="detailInformation">
@@ -54,7 +57,7 @@ function NewArrivalsProductsSection({ title, subTitle }: { title: string; subTit
                     </div>
                     <h4>{product.price}</h4>
                   </div>
-                </>
+                </div>
               )}
             </ProductGrid.Item>
           ))}

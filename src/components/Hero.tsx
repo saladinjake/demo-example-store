@@ -1,13 +1,15 @@
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 export const HeroBanner = () => {
-    return(
-         <HeroWrapper>
-        <h4>Shop with Confidence</h4>
-        <h2>Spring Board Merchant</h2>
-        <h1>On all products</h1>
-        <p>Save more with coupons & up to 70% off!</p>
-        <CtaButton>Shop Now</CtaButton>
-    </HeroWrapper>
+    const navigate = useNavigate()
+    return (
+        <HeroWrapper>
+            <h4>Shop with Confidence</h4>
+            <h2>Spring Board Merchant</h2>
+            <h1>Affordable  products</h1>
+            <p>Save more with coupons & up to 70% off!</p>
+            <CtaButton onClick={() => navigate("/produts-explorer")} >Shop Now</CtaButton>
+        </HeroWrapper>
     )
 }
 
@@ -36,7 +38,7 @@ const HeroWrapper = styled.section`
 
 `
 
-const CtaButton =styled.button`
+const CtaButton = styled.button`
  
     background-image: url(images/button.png);
     background-color: transparent;
