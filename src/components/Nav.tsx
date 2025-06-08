@@ -1,31 +1,53 @@
 import styled from "styled-components"
 import { useAuth } from "../contexts/AuthContext"
-import { MobileNav } from "./NavMobile"
+
 export const Header = () => {
-    const { user} = useAuth()
+    const { user } = useAuth()
 
     return (
 
-     <HeaderWraper>
-        
-        <a href="./"><img src="images/logo.png" className="logo" alt="Shop" /></a>
-        <div>
-            <Menu>
-                <MenuItem><a className="active" href="/">Home</a></MenuItem>
-                <MenuItem><a href="/products-explorer">Shop</a></MenuItem>
-                <MenuItem><a href="/login">Login</a></MenuItem>
-                <MenuItem><a href="/register">Signup</a></MenuItem>
-                <MenuItem id="lg-bag"><a href="/cart"><i className="far fa-shopping-bag"></i></a></MenuItem>
+        <HeaderWraper>
+            {/*desktop*/}
+            <a href="./"><img src="images/logo.png" className="logo" alt="Shop" /></a>
+            <div>
+                <Menu>
+                    <MenuItem><a className="active" href="/">Home</a></MenuItem>
+                    <MenuItem><a href="/products-explorer">Shop</a></MenuItem>
+                    <MenuItem><a href="/login">Login</a></MenuItem>
+                    <MenuItem><a href="/register">Signup</a></MenuItem>
+                    <MenuItem id="lg-bag"><a href="/cart"><i className="far fa-shopping-bag"></i></a></MenuItem>
 
-                {user && <MenuItem id="lg-bag">Welcome back {user.name}</MenuItem>} 
-                <a href="#" id="close"><i className="far fa-times"></i></a>
-            </Menu>
-        </div>
-        <div id="mobile">
-            <a href="/cart"><i className="far fa-shopping-bag"></i></a>
-            <i id="bar" className="fas fa-outdent"></i>
-        </div>
-    </HeaderWraper>
+                    {user && <MenuItem id="lg-bag">Welcome back   <div className="avatar avatar-md">
+                        <img src="..." />
+                        <span className="badge status online"></span>
+                    </div></MenuItem>
+
+                    }
+                    <a href="#" id="close"><i className="far fa-times"></i></a>
+                </Menu>
+            </div>
+            {/*mobile*/}
+            <div id="mobile">
+
+                <input type="checkbox" id="side-toggle" className="side-toggle" />
+                <label className="hamburger">&#9776;</label>
+
+                <div className="side-drawer">
+                    <label className="close-btn">&times;</label>
+                    <nav className="drawer-menu">
+                        <a href="#">Home</a>
+                        <a href="#">Services</a>
+                        <a href="#">Portfolio</a>
+                        <a href="#">Contact</a>
+                    </nav>
+                </div>
+
+                <a href="/cart"><i className="far fa-shopping-bag"></i></a>
+                <i id="bar" className="fas fa-outdent"></i>
+
+            </div>
+
+        </HeaderWraper>
     )
 }
 
@@ -52,16 +74,140 @@ const HeaderWraper = styled.section`
     aMenuItemgn-items: center;
 }
 
+
+    .side-toggle {
+  display: none;
+}
+
+.hamburger {
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: inline-block;
+  background: #fafafa;
+  color: black;
+  border-radius: 0.375rem;
+}
+
+.side-drawer {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  height: 100vh;
+  width: 250px;
+  background-color: #fff;
+   box-shadow: 50px -50px 12px #fafafa;
+  color: #444;
+  padding: 1rem;
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.side-drawer .close-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+.drawer-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.drawer-menu a {
+  color: #444;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #374151;
+}
+
+.drawer-menu a:hover {
+  color: #333;
+}
+
+
+.side-toggle:checked + .hamburger + .side-drawer {
+  left: 0;
+}
+
+
+
+
+
+
+
+.avatar {
+  position: relative;
+  display: inline-block;
+  border-radius: 9999px;
+  overflow: hidden;
+  background:#eaeaea;
+}
+
+.avatar img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Sizes */
+.avatar-sm { width: 32px; height: 32px; }
+.avatar-md { width: 48px; height: 48px; }
+.avatar-lg { width: 64px; height: 64px; }
+.avatar-xl { width: 96px; height: 96px; }
+
+/* Badge base */
+.badge {
+  position: absolute;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* Status Dot */
+.status {
+  width: 12px;
+  height: 12px;
+  top: 0;
+  right: 0;
+  border: 2px solid white;
+}
+
+/* Online/Offline status */
+.status.online { background: #10b981; }   /* Green */
+.status.offline { background: #ef4444; }  /* Red */
+.status.busy { background: #f59e0b; }     /* Amber */
+
+/* Count Badge */
+.count {
+  background: #ef4444;
+  min-width: 16px;
+  height: 16px;
+  font-size: 0.65rem;
+  padding: 0 4px;
+  top: -4px;
+  right: -4px;
+  border: 2px solid white;
+}
+
+
 `
 
 
-const Menu =styled.ul`
+const Menu = styled.ul`
     display: flex;
     align-items: center;
     justify-content: center;
 `
 
-const MenuItem =styled.li`
+const MenuItem = styled.li`
 
 &   {
     list-style: none;

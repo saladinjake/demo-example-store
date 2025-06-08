@@ -19,9 +19,9 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const LOCAL_STORAGE_KEY = 'demo-shop-auth-user';
 
 const mockUsers: User[] = [
-  { id: '1', name: 'Alice', role: 'admin' },
-  { id: '2', name: 'Bob', role: 'user' },
-  { id: '3', name: 'Charlie', role: 'driver' },
+  { id: '1', name: 'Alice@me.com', role: 'admin' },
+  { id: '2', name: 'Bob@me.com', role: 'user' },
+  { id: '3', name: 'Charlie@me.com', role: 'vendor' },
 ];
 
 

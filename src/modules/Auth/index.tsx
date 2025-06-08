@@ -29,7 +29,8 @@ const SignIn = () => {
 
 
 
-  const handleSendToApi =async () => {
+  const handleSendToApi =async (e) => {
+    e.preventDefault()
 
     if (!values.email || !values.password) {
       setError("Email and password required");
@@ -44,7 +45,7 @@ const SignIn = () => {
     // setLoading(false);
 
     if (success) {
-      navigate('/dashboard');
+      navigate('/products-explorer');
     } else {
       setError('Invalid username or password');
     }
@@ -54,7 +55,7 @@ const SignIn = () => {
     <Container>
       <FormCard>
         <Title>Login</Title>
-        <form>
+          {error && error}     
           <Box py="4">
             <Input
               required
@@ -90,13 +91,12 @@ const SignIn = () => {
 
           <ForgotPassword href="#">Forgot password?</ForgotPassword>
           <Box py="4">
-            <Button type="submit" width="100%" color="primary"
+            <Button onClick={handleSendToApi} type="submit" width="100%" color="primary"
              disabled={invalid}
              loading={loading}
             variant="outline">  {loading ? 'Logging in...' : 'Login'}</Button>
 
           </Box>
-        </form>
         <SocialButtons>
           <GoogleButton>
             <GoogleIcon />

@@ -2,24 +2,37 @@ import React, { ReactNode } from 'react';
 import { Product } from '../../contexts/NewArrivalProductContext';
 import styled from 'styled-components';
 import Flex from '../UIElements/Flex';
+import Input from '../UIElements/Input';
 interface ProductGridProps {
   children: ReactNode;
+  filter:any;
+  setFilter: (val:any) => void;
 }
 
 interface ProductGridItemProps {
   product: Product;
+  
   children: (product: Product) => ReactNode;  // render prop for custom rendering
 }
 
-function ProductGrid({ children }: ProductGridProps) {
+function ProductGrid({ children , filter, setFilter}: ProductGridProps) {
   return (
     <>
-    <h2>New Arrivals</h2>
-    <Flex direction='row' gap="10px 20px" my="10" mx="16">
-      {children}
-    </Flex>
+ <Flex justifyContent='end'>
+   <input
+          type="text"
+          placeholder="Search products..."
+          value={filter}
+          name="filter"
+          onChange={(e: any) => setFilter(e.target.value)}
+          className="mb-4 p-2 border rounded w-full max-w-sm"
+        />
+ </Flex>
+      <Flex direction='row' gap="10px 20px" my="10" mx="16">
+        {children}
+      </Flex>
     </>
-    
+
   );
 }
 
@@ -30,7 +43,6 @@ function ProductGridItem({ product, children }: ProductGridItemProps) {
 ProductGrid.Item = ProductGridItem;
 
 export default ProductGrid;
-
 
 
 const ProductCardWrapper = styled.div`

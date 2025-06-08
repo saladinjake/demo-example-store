@@ -13,7 +13,7 @@ const HomeModule =  () => {
    <Fragment>
       
       <BannerAdsSales/>
-      <NewArrivalsListPage/>
+      <NewArrivalsListPage title="New Products " subTitle="T-shirts Collection For Men"/>
       <ProductListing title="Featured Products " subTitle="T-shirts Collection For Men"/>
       <OffSalesDiscountBanner/>
       <NewsLetterSection/>

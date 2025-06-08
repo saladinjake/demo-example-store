@@ -13,8 +13,8 @@ email: string;
 }
 const loginValidations = (values: IAuth) => {
   const errors = {
-    ...model("email")(values.name)("isRequired|isEmail"),
-    ...model("password")(values.route)("isRequired|min:2"),
+    ...model("email")(values.email)("isRequired|isEmail"),
+    ...model("password")(values.password)("isRequired|min:2"),
    
   };
 
