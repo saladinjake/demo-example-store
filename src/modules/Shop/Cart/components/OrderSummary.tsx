@@ -29,7 +29,7 @@ const OrderSummary = ({ cart }:{cart: any}) => {
                 <span>Subtotal excl. tax</span>
                 <span>US${total.toFixed(2)}</span>
             </TotalRow>
-            <CheckoutButton onClick={()=> navigate("/cart/checkout")}>Check out</CheckoutButton>
+            <CheckoutButton disabled={cart.length <=0} onClick={()=> navigate("/cart/checkout")}>Check out</CheckoutButton>
             <FooterText>You're protected on Octopusbay.com</FooterText>
 
             <Row >

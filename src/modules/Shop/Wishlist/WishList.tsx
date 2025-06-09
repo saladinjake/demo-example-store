@@ -4,10 +4,10 @@ import styled from "styled-components";
 
 import WishItem from "./WishItem";
 import OrderSummary from "../Cart/components/OrderSummary";
-import { useCart } from "../../../contexts/CartDrawerContext";
 import EmptyCart from "../Cart/components/CartEmpty";
-import { useState } from "react";
+
 import { useWishlist } from "../../../contexts/WishlistContext";
+import { useCart } from "../../../contexts/CartDrawerContext";
 
 // Sample cart data
 let cartData = [
@@ -44,25 +44,26 @@ let cartData = [
 ];
 
 const WishBag = () => {
-  
-   const { wishlist,removeFromWishlist  } = useWishlist()
+
+  const { wishlist, removeFromWishlist } = useWishlist()
+  const { cart} = useCart()
 
   if (wishlist.length === 0)
-    return <EmptyCart message="Your wishlist is empty."/>;
+    return <EmptyCart message="Your wishlist is empty." />;
 
   return (
     <Container>
       <CartSection>
         <Title>Wish List</Title>
-       
-        {cartData.map((item) => (
-          <WishItem 
+
+        {wishlist.map((item: any) => (
+          <WishItem
             removeItem={removeFromWishlist}
-           
-           key={item.id} item={item} />
+
+            key={item.id} item={item} />
         ))}
       </CartSection>
-      <OrderSummary cart={cartData} />
+      <OrderSummary cart={cart} />
     </Container>
   );
 };
@@ -74,7 +75,10 @@ const Container = styled.div`
   padding: 20px;
   max-width: 100%;
   margin: auto;
-      box-shadow: -50px 50px 25px rgba(0, 0, 0, .08);
+  box-shadow: -50px 50px 25px rgba(0, 0, 0, .08);
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 
 const CartSection = styled.div`

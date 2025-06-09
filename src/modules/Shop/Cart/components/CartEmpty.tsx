@@ -67,7 +67,7 @@ const EmptyCart = ({ message} : {message:string}) => {
        </Box>
     </Flex>
     
-      <StartSourcingButton  onClick={()=> navigate("/shop")}>Start Sourcing</StartSourcingButton>
+      <StartSourcingButton  onClick={()=> navigate("/products-explorer")}>Start Sourcing</StartSourcingButton>
     </CartWrapper>
   );
 };

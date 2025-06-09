@@ -10,15 +10,15 @@ const CartItem = ({ item,
     <ItemContainer >
       <Checkbox type="checkbox" />
       <ProductDetails>
-        <Vendor>{item.vendor}</Vendor>
+        <Vendor>{item?.vendor || "Test Vendor"}</Vendor>
         <ProductInfo>
-          <img src={item.product.image} alt={item.product.name} />
+          <img src={item.imageUrl} alt={item.name} />
           <div>
-            <ProductName>{item.product.name}</ProductName>
+            <ProductName>{item.name}</ProductName>
             <Details>
-              Color: {item.product.color}, Size: {item.product.size}
+              Color: {item.color || "Same as selected"}, Size: {item.size ||"Medium"}
             </Details> 
-            <Price>US${item.product.price.toFixed(2)}</Price>
+            {/* <Price>US${item.price.toFixed(2)}</Price> */}
           </div>
         </ProductInfo>
         
@@ -32,10 +32,10 @@ const CartItem = ({ item,
         onClick={() =>
           removeItem(item.id)         }
       >
-        {"Remove from Wishlist" }
+        {"Remove" }
       </button>
         </QuantitySelector>
-        <DeleteButton>&#128465;</DeleteButton>
+      
       
         </FlexEnd>
         </ProductDetails>
@@ -106,23 +106,13 @@ const QuantitySelector = styled.div`
     border: none;
     padding: 10px 10px;
     cursor: pointer;
-    width: 50px;
+    width: 120px;
    border-radius: 10px;
     font-size: 14px;
     
   }
 `;
 
-const DeleteButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  color: red;
-  width:30px;
-
- 
-`;
 
 const FlexEnd =styled.div`
  display:flex;
