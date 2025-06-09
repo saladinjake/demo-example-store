@@ -54,10 +54,16 @@ const OrderSummary = ({ cart }:{cart: any}) => {
 // Styled Components
 const SummaryContainer = styled.div`
   width: 30%;
-  padding: 20px;
+  padding: 10px;
   background: #fff;
   border-radius: 10px;
-  box-shadow: -50px 50px 25px rgba(0, 0, 0, .08)
+  box-shadow: -50px 50px 25px rgba(0, 0, 0, .08);
+
+  
+  
+   @media (max-width: 767px) {
+    display: none;
+  }
 `;
 
 const Title = styled.h3`

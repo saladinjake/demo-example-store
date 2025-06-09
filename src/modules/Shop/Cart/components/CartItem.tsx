@@ -4,10 +4,10 @@ import styled from "styled-components";
 import { useWishlist } from "../../../../contexts/WishlistContext";
 
 
-const CartItem = ({ item, 
-  removeItem, 
-  updateQuantity, 
-  clearCart }:{item:any, removeItem: any, updateQuantity: any, clearCart: any}) => {
+const CartItem = ({ item,
+  removeItem,
+  updateQuantity,
+  clearCart }: { item: any, removeItem: any, updateQuantity: any, clearCart: any }) => {
   const [quantity, setQuantity] = useState(item.quantity);
 
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
@@ -23,41 +23,36 @@ const CartItem = ({ item,
           <div>
             <ProductName>{item.name}</ProductName>
             <Details>
-              Color: {item?.color || "Same as Selected"}, Size: {item?.size ||"Medium"}
-            </Details> 
-            <Price>US${ Number(item?.price).toFixed(2)}</Price>
+              Color: {item?.color || "Same as Selected"}, Size: {item?.size || "Medium"}
+            </Details>
+            <Price>US${Number(item?.price).toFixed(2)}</Price>
           </div>
         </ProductInfo>
-        
+
         <FlexEnd>
           <button
-       style={{
-        background: inWishlist ?  "#f6f6f6": "#f60",
-        marginRight:"10px",
-        padding:"10px",
-        color: inWishlist ?  "#000": "#fff",
-        
-       }}
-        onClick={() =>
-          inWishlist ? removeFromWishlist(item.id) : addToWishlist(item)
-        }
-      >
-        {inWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
-      </button>
-        <QuantitySelector>
-          <button onClick={() => setQuantity(Math.max(1, item.quantity - 1))}>-</button>
-          <span>{item.quantity}</span>
-          <button onClick={() =>           updateQuantity(item.id, parseInt(item.quantity +1) || 1)
- 
-          //  setQuantity(quantity + 1)
-            }>+
-             
-            </button>
-        </QuantitySelector>
-        <DeleteButton>&#128465;</DeleteButton>
-      
+            style={{
+              background: inWishlist ? "#f6f6f6" : "#f60",
+              marginRight: "10px",
+              padding: "10px",
+              color: inWishlist ? "#000" : "#fff",
+
+            }}
+            onClick={() =>
+              inWishlist ? removeFromWishlist(item.id) : addToWishlist(item)
+            }
+          >
+            {inWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
+          </button>
+          <QuantitySelector>
+            <button onClick={() =>  updateQuantity(item.id, item.quantity - 1 || 0)}>-</button>
+            <span>{item.quantity}</span>
+            <button onClick={() => updateQuantity(item.id, parseInt(item.quantity + 1) || 1)}>+</button>
+          </QuantitySelector>
+          <DeleteButton onClick={()=> removeItem(item.id)}>&#128465;</DeleteButton>
+
         </FlexEnd>
-        </ProductDetails>
+      </ProductDetails>
     </ItemContainer>
   );
 };
@@ -102,7 +97,7 @@ const ProductName = styled.p`
 `;
 
 const Details = styled.p`
-  font-size: 14px;
+  font-size: 16px;
   color: gray;
 `;
 
@@ -143,7 +138,7 @@ const DeleteButton = styled.button`
  
 `;
 
-const FlexEnd =styled.div`
+const FlexEnd = styled.div`
  display:flex;
   justify-content: flex-end;
 `

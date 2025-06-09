@@ -7,6 +7,7 @@ import OrderSummary from "./components/OrderSummary";
 import { useCart } from "../../../contexts/CartDrawerContext";
 import EmptyCart from "./components/CartEmpty";
 import { useState } from "react";
+import { Footer } from "../../../components/Footer";
 
 // Sample cart data
 let cartData = [
@@ -43,34 +44,39 @@ let cartData = [
 ];
 
 const ShoppingCart = () => {
-  
+
   const [uiDemo,] = useState(false)
   const { cart, removeItem, updateQuantity, clearCart } = useCart();
-  console.log(cart,">>>>>>>>")
-  const total = cart.reduce((sum :  number, item: any) => sum + item.price * item.quantity, 0);
+  console.log(cart, ">>>>>>>>")
+  //const total = cart.reduce((sum: number, item: any) => sum + item.price * item.quantity, 0);
 
   cartData = uiDemo ? cartData : cart
 
 
   if (cart.length === 0)
-    return <EmptyCart message="Your shopping cart is empty."/>;
+    return <EmptyCart message="Your shopping cart is empty." />;
   return (
+    <>
     <Container>
-      <CartSection>
-        <Title>Shopping cart</Title>
-        <SelectAll>
-          <input type="checkbox" /> Select all variations ({cartData.length})
-        </SelectAll>
-        {cartData.map((item) => (
-          <CartItem 
-            updateQuantity={updateQuantity}
-            removeItem={removeItem}
-            clearCart={clearCart}
-           key={item.id} item={item} />
-        ))}
-      </CartSection>
-      <OrderSummary cart={cartData} />
+        <CartSection>
+          <Title>Shopping cart</Title>
+          <SelectAll>
+            <input type="checkbox" /> Select all variations ({cartData.length})
+          </SelectAll>
+          {cartData.map((item) => (
+            <CartItem
+              updateQuantity={updateQuantity}
+              removeItem={removeItem}
+              clearCart={clearCart}
+              key={item.id} item={item} />
+          ))}
+        </CartSection>
+        <OrderSummary cart={cartData} />
+       
+
     </Container>
+     <Footer/>
+    </>
   );
 };
 
@@ -81,10 +87,15 @@ const Container = styled.div`
   padding: 20px;
   max-width: 100%;
   margin: auto;
-      box-shadow: -50px 50px 25px rgba(0, 0, 0, .08);
+  box-shadow: -50px 50px 25px rgba(0, 0, 0, .08);
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 
 const CartSection = styled.div`
+
+  
   width: 70%;
 `;
 
@@ -100,5 +111,7 @@ const SelectAll = styled.label`
   font-size: 16px;
   margin-bottom: 10px;
 `;
+
+
 
 export default ShoppingCart;
