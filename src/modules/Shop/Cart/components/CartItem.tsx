@@ -19,11 +19,11 @@ const CartItem = ({ item,
       <ProductDetails>
         <Vendor>{item?.vendor || "Sloovi Sales"}</Vendor>
         <ProductInfo>
-          <img src={item.thumbnail} alt={item.name} />
+          <img src={item?.imageUrl} alt={item.name} />
           <div>
             <ProductName>{item.name}</ProductName>
             <Details>
-              Color: {item?.color || "N/a"}, Size: {item?.size ||"N/a"}
+              Color: {item?.color || "Same as Selected"}, Size: {item?.size ||"Medium"}
             </Details> 
             <Price>US${ Number(item?.price).toFixed(2)}</Price>
           </div>
@@ -31,9 +31,13 @@ const CartItem = ({ item,
         
         <FlexEnd>
           <button
-        className={` ${
-          inWishlist ? "bg-red-600 text-white" : "bg-gray-200"
-        }`}
+       style={{
+        background: inWishlist ?  "#f6f6f6": "red",
+        marginRight:"10px",
+        padding:"10px",
+        color: inWishlist ?  "#fff": "#000",
+        
+       }}
         onClick={() =>
           inWishlist ? removeFromWishlist(item.id) : addToWishlist(item)
         }

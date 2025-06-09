@@ -16,6 +16,7 @@ const navigate = useNavigate()
                     <MenuItem><a href="/products-explorer">Shop</a></MenuItem>
                     <MenuItem><a href="/login">Login</a></MenuItem>
                     <MenuItem><a href="/register">Signup</a></MenuItem>
+                     <MenuItem><a href="/cart">Cart</a></MenuItem>
                     <MenuItem id="lg-bag"><a href="/cart"><i className="far fa-shopping-bag"></i></a></MenuItem>
 
                     {user && <MenuItem id="lg-bag">

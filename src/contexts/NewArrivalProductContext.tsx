@@ -7,6 +7,8 @@ export type Product = {
   description: string;
   thumbnail: string;
   brand: string;
+  shipping: string | number;
+  discount: string | number
 };
 
 interface ProductContextType {

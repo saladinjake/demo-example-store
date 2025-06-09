@@ -9,8 +9,11 @@ export function ProductSkeleton() {
     </div>
   );
 }
-export const ProductCard = ({ imageUrl, brand, name, price, id }: {
-  imageUrl: string, brand: string, name: string, price: string | number, id: string | number
+export const ProductCard = ({ imageUrl, brand, name, price, id, shipping, discount }: {
+  imageUrl: string, brand: string, name: string, price: string | number, id: string | number,
+  shipping: string | number, discount: string | number
+
+
 }) => {
   const { addItem } = useCart()
   const navigate = useNavigate()
@@ -31,7 +34,7 @@ export const ProductCard = ({ imageUrl, brand, name, price, id }: {
       </div>
       <a href="#" onClick={(e) => {
         e.preventDefault()
-        addItem({ imageUrl, brand, name, price, id })
+        addItem({ imageUrl, brand, name, price, id, shipping, discount })
                     
       }}><i className="fas fa-shopping-cart cart">Add to cart</i></a>
     </ProductCardWrapper>
