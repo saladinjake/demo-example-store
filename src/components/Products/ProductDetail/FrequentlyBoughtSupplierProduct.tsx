@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import { useCart } from "../../../contexts/CartDrawerContext";
 
 // Styled Components
 const Container = styled.div`
@@ -10,6 +11,16 @@ const Container = styled.div`
 
 const SectionTitle = styled.h2`
   margin-bottom: 15px;
+  margin-top:20px;
+  font-size: 26px;
+   @media (max-width: 767px) {
+    margin-top: 20px;
+    width: 100%;
+   
+      font-size: 20px;
+      margin-top:10px;
+    
+  }
 `;
 
 const ProductGrid = styled.div`
@@ -47,18 +58,22 @@ const Price = styled.p`
 
 // Dummy Data Generator
 const generateProducts = (count: number) => {
-  return Array.from({ length: count }, (_, index) => ({
-    id: index + 1,
-    name: `Product ${index + 1}`,
-    image: `/images/products/f${Math.floor((Math.random() * 8 + 1))}.jpg`,
-    price: `$${(Math.random() * 10 + 5).toFixed(2)}`,
-  }));
+  return Array.from({ length: count }, (_, index) => {
+    const id = Math.floor((Math.random() * 8 + 1))
+    return ({
+      id,
+      name: `Product ${index + 1}`,
+      image: `/images/products/f${Math.floor((Math.random() * 8 + 1))}.jpg`,
+      price: `$${(Math.random() * 10 + 5).toFixed(2)}`,
+    })
+  });
 };
 
-const ProductList = ({ title="", initialLoad = 10 }) => {
+export const ProductListLoadMore = ({ title = "", initialLoad = 10 }) => {
   const [products, setProducts] = useState(generateProducts(initialLoad));
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef(null);
+  const {addItem } = useCart()
 
   // Load More Products on Scroll
   useEffect(() => {
@@ -87,6 +102,14 @@ const ProductList = ({ title="", initialLoad = 10 }) => {
             <ProductImage src={product.image} alt={product.name} />
             <ProductName>{product.name}</ProductName>
             <Price>{product.price}</Price>
+            <button
+             style={{
+              padding: "10px",
+              background:"#fafafa",
+              color:"#000",
+              border:"none"
+             }}
+            onClick={()=> addItem({...product, imageUrl: product.image})}>Add to cart</button>
           </ProductCard>
         ))}
       </ProductGrid>
@@ -95,13 +118,13 @@ const ProductList = ({ title="", initialLoad = 10 }) => {
   );
 };
 
-const App = () => {
+const DisplayScrollLoadMore = () => {
   return (
     <Container>
-      <ProductList title="Frequently Bought Together" />
-      <ProductList title="Supplier's Popular Products" />
+      <ProductListLoadMore title="Frequently Bought Together" />
+      <ProductListLoadMore title="Supplier's Popular Products" />
     </Container>
   );
 };
 
-export default App;
+export default DisplayScrollLoadMore;
