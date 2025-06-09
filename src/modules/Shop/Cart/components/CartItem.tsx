@@ -32,10 +32,10 @@ const CartItem = ({ item,
         <FlexEnd>
           <button
        style={{
-        background: inWishlist ?  "#f6f6f6": "red",
+        background: inWishlist ?  "#f6f6f6": "#f60",
         marginRight:"10px",
         padding:"10px",
-        color: inWishlist ?  "#fff": "#000",
+        color: inWishlist ?  "#000": "#fff",
         
        }}
         onClick={() =>
@@ -45,11 +45,11 @@ const CartItem = ({ item,
         {inWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
       </button>
         <QuantitySelector>
-          <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
-          <span>{quantity}</span>
-          <button onClick={() =>           //updateQuantity(item.id, parseInt(quantity) || 1)
+          <button onClick={() => setQuantity(Math.max(1, item.quantity - 1))}>-</button>
+          <span>{item.quantity}</span>
+          <button onClick={() =>           updateQuantity(item.id, parseInt(item.quantity +1) || 1)
  
-            setQuantity(quantity + 1)
+          //  setQuantity(quantity + 1)
             }>+
              
             </button>

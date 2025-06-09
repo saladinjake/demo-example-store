@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 const OrderSummary = ({ cart }:{cart: any}) => {
     const subtotal = cart.reduce((acc: any, item: any) => acc + item.price * item.quantity, 0);
-    const shipping = cart.reduce((acc: any, item: any) => acc + Number(item.shipping), 0);
-    const discount = cart.reduce((acc: any, item: any) => acc + Number(item.discount), 0);
+    const shipping = cart.reduce((acc: any, item: any) => acc + item.shipping, 0);
+    const discount = cart.reduce((acc: any, item: any) => acc + item.discount, 0);
     const total = subtotal + shipping - discount;
 
     const navigate = useNavigate()
@@ -27,7 +27,7 @@ const OrderSummary = ({ cart }:{cart: any}) => {
             </Row>
             <TotalRow>
                 <span>Subtotal excl. tax</span>
-                <span>US${total}</span>
+                <span>US${total.toFixed(2)}</span>
             </TotalRow>
             <CheckoutButton onClick={()=> navigate("/cart/checkout")}>Check out</CheckoutButton>
             <FooterText>You're protected on Octopusbay.com</FooterText>
