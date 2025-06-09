@@ -30,10 +30,10 @@ ProductCard.Title = function Title() {
 
 ProductCard.Description = function Description() {
   const product = useContext(ProductContext)!;
-  return <p className="text-sm text-gray-600">{product.description}</p>;
+  return <p className="">{product.description}</p>;
 };
 
 ProductCard.Price = function Price() {
   const product = useContext(ProductContext)!;
-  return <div className="text-primary font-semibold mt-2">${product.price.toFixed(2)}</div>;
+  return <div className="">${product.price.toFixed(2)}</div>;
 };

@@ -8,7 +8,7 @@ export const HeroBanner = () => {
             <h2>Spring Board Merchant</h2>
             <h1>Affordable  products</h1>
             <p>Save more with coupons & up to 70% off!</p>
-            <CtaButton onClick={() => navigate("/produts-explorer")} >Shop Now</CtaButton>
+            <CtaButton onClick={() => navigate("/products-explorer")} >Shop Now</CtaButton>
         </HeroWrapper>
     )
 }

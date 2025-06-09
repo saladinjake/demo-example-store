@@ -5,38 +5,37 @@ import { useNavigate } from "react-router-dom";
 export function ProductSkeleton() {
   return (
     <div className="">
-     
+
     </div>
   );
 }
-export const ProductCard = ({ imageUrl, brand, name,  price, id }: {
-    imageUrl: string, brand: string, name: string,  price : string | number, id: string | number
+export const ProductCard = ({ imageUrl, brand, name, price, id }: {
+  imageUrl: string, brand: string, name: string, price: string | number, id: string | number
 }) => {
-     const { addItem }= useCart()
-     const navigate = useNavigate()
-    return (
-         <ProductCardWrapper onClick={()=> navigate(`/products-explorer/${id}`)}>
-                <img src={imageUrl} alt="" />
-                <div className="detailInformation">
-                    <span>{brand}</span>
-                    <h5>{name}</h5>
-                    <div className="star">
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                        <i className="fas fa-star"></i>
-                    </div>
-                    <h4>{price}</h4>
-                </div>
-                <a href="#" onClick={(e)=>{
-                  e.preventDefault()
-
-                  addItem({ imageUrl, brand, name,  price })
-
-                }}><i className="fas fa-shopping-cart cart"></i></a>
-            </ProductCardWrapper>
-    )
+  const { addItem } = useCart()
+  const navigate = useNavigate()
+  return (
+    <ProductCardWrapper >
+      <img src={imageUrl} alt="" onClick={() => navigate(`/products-explorer/${id}`)} />
+      <div className="detailInformation" onClick={() => navigate(`/products-explorer/${id}`)}>
+        <span>{brand}</span>
+        <h5>{name}</h5>
+        <div className="star">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+        </div>
+        <h4>{price}</h4>
+      </div>
+      <a href="#" onClick={(e) => {
+        e.preventDefault()
+        addItem({ imageUrl, brand, name, price, id })
+                    
+      }}><i className="fas fa-shopping-cart cart">Add to cart</i></a>
+    </ProductCardWrapper>
+  )
 }
 
 
@@ -96,10 +95,10 @@ const ProductCardWrapper = styled.div`
 }
 
 & .cart {
-    width: 40px;
+    width: 100px;
     height: 40px;
     line-height: 40px;
-    border-radius: 50px;
+    border-radius: 10px;
     background-color: #e8f6ea;
     font-weight: 500;
     color: #088178;
@@ -107,6 +106,7 @@ const ProductCardWrapper = styled.div`
     position: absolute;
     bottom: 20px;
     right: 10px;
+    text-align: center;
 }
 
 `

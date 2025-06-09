@@ -1,16 +1,16 @@
-import React, { createContext, useContext, useReducer, useEffect } from "react";
-
+import React, { createContext, useContext, useReducer, useEffect, useState } from "react";
+import { ToastNotiier } from "../components/Toast";
 const CartContext = createContext({
-  cart:[],
-  addItem : (product: any) =>{}, 
-  removeItem : (id: string| number) =>{}, 
-  updateQuantity : (id:any, quantity: number) =>{}, 
-  clearCart : () =>{}
+  cart: [],
+  addItem: (product: any) => { },
+  removeItem: (id: string | number) => { },
+  updateQuantity: (id: any, quantity: number) => { },
+  clearCart: () => { },
+  // setShowTost: (val:boolean) => void
 });
 
 const LOCAL_STORAGE_KEY = "cart";
-
-const initialState = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+const initialState: any = JSON.parse( localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
 
 function cartReducer(state: any, action: any) {
   switch (action.type) {
@@ -45,24 +45,42 @@ function cartReducer(state: any, action: any) {
   }
 }
 
-export function CartProvider({ children }: {children: any}) {
+export function CartProvider({ children }: { children: any }) {
   const [cart, dispatch] = useReducer(cartReducer, initialState);
-
+  const [toastType, setToastType] = useState<"success" | "warning" | "info" | "error">("info")
+  const [showToast, setShowToast] = useState(false)
+  const [message, setMessage] = useState("")
+  const displayToast = () => {
+    setShowToast(true)
+       setTimeout(()=> setShowToast(false), 3000)
+  
+  }
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cart));
   }, [cart]);
 
-  const addItem = (product: any) => dispatch({ type: "ADD_ITEM", payload: product });
-  const removeItem = (id: string | number) => dispatch({ type: "REMOVE_ITEM", payload: id });
-  const updateQuantity = (id : string | number, quantity: number) =>
+  const addItem = (product: any) => {
+    dispatch({ type: "ADD_ITEM", payload: product });
+    setMessage("Success! Your Item was added to cart.")
+    setToastType("success")
+    displayToast()
+  }
+  const removeItem = (id: string | number) => {
+    dispatch({ type: "REMOVE_ITEM", payload: id });
+    setMessage("Success! Your Item was removed from cart.")
+    setToastType("success")
+    displayToast()
+  }
+  const updateQuantity = (id: string | number, quantity: number) =>
     dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } });
   const clearCart = () => dispatch({ type: "CLEAR_CART" });
 
   return (
     <CartContext.Provider
-      value={{ cart , addItem, removeItem, updateQuantity, clearCart }}
+      value={{ cart, addItem, removeItem, updateQuantity, clearCart }}
     >
       {children}
+      <ToastNotiier message={message} type={toastType} display={showToast} />
     </CartContext.Provider>
   );
 }

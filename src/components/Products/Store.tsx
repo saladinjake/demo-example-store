@@ -1,12 +1,12 @@
 import styled from "styled-components"
 import { ProductCard, ProductSkeleton } from "./ProductCard"
 import Flex from "../UIElements/Flex"
-import Input from "../UIElements/Input"
+
 import Box from "../UIElements/Box"
 import { useState, useEffect, useRef, useCallback } from "react"
 import { useSearchInputDebounce } from "../../hooks/useDebounce"
 import { fetchProducts } from "../../api/services/products.api";
-import { ReactNode } from "react"
+// import { CartProvider } from "../../contexts/CartDrawerContext"
 
 
 interface IList {
@@ -18,17 +18,17 @@ interface IList {
 const PRODUCTS_PER_PAGE = 10;
 export const ProductListing = ({ title, subTitle }: IList) => {
 
-  const products =  [
-  { id: 1, description: "Sample Description", name: "Rock Town T-shirt", thumbnail: "/images/products/f1.jpg", price: "$22.44", brand: "Rock town" },
-  { id: 2, description: "Sample Description", name: "Cardilac T-shirt", thumbnail: "/images/products/f2.jpg", price: "$22.44", brand: "Mtv" },
-  { id: 3, description: "Sample Description", name: "Rosewell T-shirt", thumbnail: "/images/products/f3.jpg", price: "$22.44", brand: "Roswell" },
-  { id: 4, description: "Sample Description", name: "Bonjo T-shirt", thumbnail: "/images/products/f4.jpg", price: "$22.44", brand: "Bonjo" },
-  { id: 5, description: "Sample Description", name: "Dior T-shirt", thumbnail: "/images/products/f5.jpg", price: "$22.44", brand: "Dior" },
-  { id: 6, description: "Sample Description", name: "Sven T-shirt", thumbnail: "/images/products/f6.jpg", price: "$22.44", brand: "Sven" },
-  { id: 7, description: "Sample Description", name: "Resses T-shirt", thumbnail: "/images/products/f7.jpg", price: "$22.44", brand: "Resses" },
-  { id: 8, description: "Sample Description", name: "Jessklan T-shirt", thumbnail: "/images/products/f8.jpg", price: "$22.44", brand: "Jess" },
+  const products = [
+    { id: 1, description: "Sample Description", name: "Rock Town T-shirt", thumbnail: "/images/products/f1.jpg", price: "22.44", brand: "Rock town" },
+    { id: 2, description: "Sample Description", name: "Cardilac T-shirt", thumbnail: "/images/products/f2.jpg", price: "22.44", brand: "Mtv" },
+    { id: 3, description: "Sample Description", name: "Rosewell T-shirt", thumbnail: "/images/products/f3.jpg", price: "22.44", brand: "Roswell" },
+    { id: 4, description: "Sample Description", name: "Bonjo T-shirt", thumbnail: "/images/products/f4.jpg", price: "22.44", brand: "Bonjo" },
+    { id: 5, description: "Sample Description", name: "Dior T-shirt", thumbnail: "/images/products/f5.jpg", price: "22.44", brand: "Dior" },
+    { id: 6, description: "Sample Description", name: "Sven T-shirt", thumbnail: "/images/products/f6.jpg", price: "22.44", brand: "Sven" },
+    { id: 7, description: "Sample Description", name: "Resses T-shirt", thumbnail: "/images/products/f7.jpg", price: "22.44", brand: "Resses" },
+    { id: 8, description: "Sample Description", name: "Jessklan T-shirt", thumbnail: "/images/products/f8.jpg", price: "22.44", brand: "Jess" },
 
-]
+  ]
   //debunce and load more
   const [allProducts, setAllProducts] = useState([]);
   const [displayedProducts, setDisplayedProducts] = useState([]);
@@ -71,7 +71,7 @@ export const ProductListing = ({ title, subTitle }: IList) => {
   }, [allProducts, debouncedSearchTerm, categoryFilter]);
 
   // Lazy load more on scroll
-  const loaderRef = useRef<HTMLDivElement|any>();
+  const loaderRef = useRef<HTMLDivElement | any>();
   const loadMore = useCallback(() => {
     const filtered = allProducts.filter((p: any) => {
       if (categoryFilter !== "all" && p.brand !== categoryFilter) return false;
@@ -108,18 +108,15 @@ export const ProductListing = ({ title, subTitle }: IList) => {
 
 
   return (
+    <>
     <ProductLisingWrapper>
       <Flex justifyContent="between">
         <Box>
-
           <h2>{title}</h2>
           <p>{subTitle}</p>
-
         </Box>
 
         <Flex justifyContent="between">
-
-
           <Box mr="8" width="100px">
             <select
               value={categoryFilter}
@@ -133,16 +130,12 @@ export const ProductListing = ({ title, subTitle }: IList) => {
               ))}
             </select>
           </Box>
-          <Input
+          <SearchBox
             required
-            label="Search"
-            isLoading={false}
             name="password"
             placeholder="Search products..."
             value={searchTerm}
             onChange={(e: any) => setSearchTerm(e.target.value)}
-
-            width="300px"
           />
         </Flex>
       </Flex>
@@ -158,7 +151,7 @@ export const ProductListing = ({ title, subTitle }: IList) => {
               name={item.name}
               brand={item.brand}
               imageUrl={item.thumbnail}
-               id={item.id} />
+              id={item.id} />
           )) :
 
             products.map(item => {
@@ -177,6 +170,7 @@ export const ProductListing = ({ title, subTitle }: IList) => {
       {/* Loader div for lazy loading */}
       <div ref={loaderRef}></div>
     </ProductLisingWrapper>
+    </>
   )
 }
 
@@ -203,5 +197,13 @@ const Container = styled.div`
 
 
 
-
+const SearchBox = styled.input`
+padding: 10px;
+width:100%;
+height:40px;
+border:1px solid #fafafa;
+width:330px;
+margin-top:30px;
+border-radius: 20px
+`
 

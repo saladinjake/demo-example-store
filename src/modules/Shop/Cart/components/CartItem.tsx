@@ -8,7 +8,7 @@ const CartItem = ({ item,
   removeItem, 
   updateQuantity, 
   clearCart }:{item:any, removeItem: any, updateQuantity: any, clearCart: any}) => {
-  const [quantity, setQuantity] = useState(item.product.quantity);
+  const [quantity, setQuantity] = useState(item.quantity);
 
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
 
@@ -17,15 +17,15 @@ const CartItem = ({ item,
     <ItemContainer >
       <Checkbox type="checkbox" />
       <ProductDetails>
-        <Vendor>{item.vendor}</Vendor>
+        <Vendor>{item?.vendor || "Sloovi Sales"}</Vendor>
         <ProductInfo>
-          <img src={item.product.image} alt={item.product.name} />
+          <img src={item.thumbnail} alt={item.name} />
           <div>
-            <ProductName>{item.product.name}</ProductName>
+            <ProductName>{item.name}</ProductName>
             <Details>
-              Color: {item.product.color}, Size: {item.product.size}
+              Color: {item?.color || "N/a"}, Size: {item?.size ||"N/a"}
             </Details> 
-            <Price>US${item.product.price.toFixed(2)}</Price>
+            <Price>US${ Number(item?.price).toFixed(2)}</Price>
           </div>
         </ProductInfo>
         
@@ -43,9 +43,9 @@ const CartItem = ({ item,
         <QuantitySelector>
           <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>-</button>
           <span>{quantity}</span>
-          <button onClick={() =>           updateQuantity(item.id, parseInt(quantity) || 1)
+          <button onClick={() =>           //updateQuantity(item.id, parseInt(quantity) || 1)
  
-            //setQuantity(quantity + 1)
+            setQuantity(quantity + 1)
             }>+
              
             </button>

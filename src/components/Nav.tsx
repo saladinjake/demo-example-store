@@ -1,9 +1,10 @@
 import styled from "styled-components"
 import { useAuth } from "../contexts/AuthContext"
+import { useNavigate } from "react-router-dom"
 
 export const Header = () => {
     const { user } = useAuth()
-
+const navigate = useNavigate()
     return (
 
         <HeaderWraper>
@@ -25,11 +26,11 @@ export const Header = () => {
                             </div>
                         </button>
                         <ul className="dropdown-list">
-                            <li><a href="/cart">Welcome Back {user?.name}</a></li>
+                            <li><a href="#" >Welcome Back {user?.name}</a></li>
 
-                            <li><a href="/cart">My Cart</a></li>
-                            <li><a href="/wishlist">My Wishlists</a></li>
-                            <li><a href="/orders">My Orders</a></li>
+                            <li onClick={() => navigate("/cart")}><a href="#" >My Cart</a></li>
+                            <li onClick={() => navigate("/wishlist")}><a href="#" >My Wishlists</a></li>
+                            <li onClick={() => navigate("/orders")}><a href="#" >My Orders</a></li>
                             <li><a href="#">Logout</a></li>
                         </ul>
                     </MenuItem>

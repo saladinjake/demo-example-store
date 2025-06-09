@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { Product } from '../../contexts/NewArrivalProductContext';
 import styled from 'styled-components';
 import Flex from '../UIElements/Flex';
-import Input from '../UIElements/Input';
+
 interface ProductGridProps {
   children: ReactNode;
   filter:any;
