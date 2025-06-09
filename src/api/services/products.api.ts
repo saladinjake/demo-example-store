@@ -16,7 +16,7 @@ type AxiosResponse<T> = {
 };
 
 const STORAGE_KEY = "fakeApiItems";
-const defaultData: Item[] = [
+export const defaultData: Item[] = [
   { id: 1, description: "Sample Description", name: "Rock Town T-shirt", thumbnail: "/images/products/f1.jpg", price: "22.44", brand: "Rock town", shipping: 2.22, discount:1 },
   { id: 2, description: "Sample Description", name: "Cardilac T-shirt", thumbnail: "/images/products/f2.jpg", price: "22.44", brand: "Mtv" ,shipping: 2.22, discount:1},
   { id: 3, description: "Sample Description", name: "Rosewell T-shirt", thumbnail: "/images/products/f3.jpg", price: "22.44", brand: "Roswell", shipping: 2.22, discount:1},

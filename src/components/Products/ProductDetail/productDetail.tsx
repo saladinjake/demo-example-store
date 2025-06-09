@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Flex from "../../UIElements/Flex";
 import Box from "../../UIElements/Box";
+import { useParams } from "react-router-dom";
+import { defaultData } from "../../../api/services/products.api";
+import { useCart } from "../../../contexts/CartDrawerContext";
 
 // Glassmorphic Background
 const GlassmorphicWrapper = styled.div`
@@ -125,9 +128,12 @@ const ProductDetailsSectionA = () => {
    images:["/images/products/f1.jpg", "/images/products/f2.jpg","/images/products/f3.jpg","/images/products/f4.jpg"],
    sizes:['small','medium','xl', 'l'],
    colors:['red','yellow', 'black']
-  }
-  const [selectedImage, setSelectedImage] = useState(product.images[0]);
+  }  
+  const { id }: {id: any} = useParams()
+  const [selectedImage, setSelectedImage] = useState<any>( parseInt(id) <= product.images[0].length ? product.images[parseInt(id) -1]: product.images[0]);
 
+  const productInfo = defaultData.find(item => item.id ==id) || defaultData[0];
+const { addItem } = useCart()
   return (
     
     <GlassmorphicWrapper>
@@ -171,10 +177,10 @@ const ProductDetailsSectionA = () => {
         <p>Shipping fee: US$39.36 for 1 piece</p>
         <p>Guaranteed delivery by May 8</p>
         <Button>Start Order</Button>
-        <Button>Add to Cart</Button>
+        <Button onClick={()=>  addItem({...productInfo, imageUrl: productInfo.thumbnail, })}>Add to Cart</Button>
 
         <h3>Protections for this product</h3>
-        <p><strong>Delivery via Alibaba Logistics</strong></p>
+        <p><strong>Delivery via Fake Alibaba Logistics</strong></p>
         <p>Expect your order to be delivered before scheduled dates or receive a 10% delay compensation.</p>
         <p><strong>Secure Payments</strong></p>
         <p>Every payment on Alibaba.com is secured with strict SSL encryption and PCI DSS data protection protocols.</p>

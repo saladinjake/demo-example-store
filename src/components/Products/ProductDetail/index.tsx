@@ -10,9 +10,9 @@ const ProductDetailsPage = () => {
     return (
       <div >
         <ProductDetailsSectionA />
-         <ProductDetailsSectionB  /> 
+         {/* <ProductDetailsSectionB  /> 
          <ProductLeadInfoPage/>
-       
+        */}
          <FrequentlyBoughtSupplierProducts/>
          <RelatedSearches/>
         {/* <ProductDetailsRelatedSection product={product} /> */}

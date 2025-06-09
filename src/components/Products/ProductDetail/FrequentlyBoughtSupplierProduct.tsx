@@ -46,16 +46,16 @@ const Price = styled.p`
 `;
 
 // Dummy Data Generator
-const generateProducts = (count) => {
+const generateProducts = (count: number) => {
   return Array.from({ length: count }, (_, index) => ({
     id: index + 1,
     name: `Product ${index + 1}`,
-    image: `/sampleProduct.jpg`,
+    image: `/images/products/f${Math.floor((Math.random() * 8 + 1))}.jpg`,
     price: `$${(Math.random() * 10 + 5).toFixed(2)}`,
   }));
 };
 
-const ProductList = ({ title, initialLoad = 10 }) => {
+const ProductList = ({ title="", initialLoad = 10 }) => {
   const [products, setProducts] = useState(generateProducts(initialLoad));
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef(null);
