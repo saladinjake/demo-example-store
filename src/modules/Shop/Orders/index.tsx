@@ -1,7 +1,11 @@
 import OrdersManager from '../../../components/Orders';
 import styled from 'styled-components';
+import { Header } from '../../../components/Nav';
 export default function OrdersPage() {
   return (
+    <>
+    <Header/>
+    
     <OrdersManager>
       {({ orders, dispatch }) => (
         <Container>
@@ -81,7 +85,8 @@ export default function OrdersPage() {
         </Container>
       )}
     </OrdersManager>
-  );
+  </>
+  )
 }
 
 

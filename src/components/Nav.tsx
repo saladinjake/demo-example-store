@@ -1,22 +1,32 @@
 import styled from "styled-components"
 import { useAuth } from "../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
+import { CartProvider, useCart } from "../contexts/CartDrawerContext"
 
 export const Header = () => {
     const { user } = useAuth()
+    const {cart } = useCart()
 const navigate = useNavigate()
-    return (
 
+const isActiveNav = (bitUrl: string) => {
+  return window.location.href.includes(bitUrl)
+}
+
+const isHome = () =>{
+  return window.location.href.split("/").pop() ===""
+}
+    return (
+<CartProvider>
         <HeaderWraper>
             {/*desktop*/}
             <a href="./"><img src="images/logo.png" className="logo" alt="Shop" /></a>
             <div>
                 <Menu>
-                    <MenuItem><a className="active" href="/">Home</a></MenuItem>
-                    <MenuItem><a href="/products-explorer">Shop</a></MenuItem>
-                    <MenuItem><a href="/login">Login</a></MenuItem>
-                    <MenuItem><a href="/register">Signup</a></MenuItem>
-                     <MenuItem><a href="/cart">Cart</a></MenuItem>
+                    <MenuItem><a className={isActiveNav("") && isHome() ? "active": ""} href="/">Home</a></MenuItem>
+                    <MenuItem><a className={isActiveNav("/products-explorer")? "active": ""} href="/products-explorer">Shop</a></MenuItem>
+                    <MenuItem><a className={isActiveNav("/login")? "active": ""} href="/login">Login</a></MenuItem>
+                    <MenuItem><a className={isActiveNav("/register")? "active": ""} href="/register">Signup</a></MenuItem>
+                     <MenuItem><a className={isActiveNav("/cart")? "active": ""} href="/cart">Cart<span className="count">{cart.length}</span></a></MenuItem>
                     <MenuItem id="lg-bag"><a href="/cart"><i className="far fa-shopping-bag"></i></a></MenuItem>
 
                     {user && <MenuItem id="lg-bag">
@@ -29,7 +39,7 @@ const navigate = useNavigate()
                         <ul className="dropdown-list">
                             <li><a href="#" >Welcome Back {user?.name}</a></li>
 
-                            <li onClick={() => navigate("/cart")}><a href="#" >My Cart</a></li>
+                            <li onClick={() => navigate("/cart")}><a href="#" >My Cart<span className="count">{cart.length}</span></a></li>
                             <li onClick={() => navigate("/wishlist")}><a href="#" >My Wishlists</a></li>
                             <li onClick={() => navigate("/orders")}><a href="#" >My Orders</a></li>
                             <li><a href="#">Logout</a></li>
@@ -62,6 +72,7 @@ const navigate = useNavigate()
             </div>
 
         </HeaderWraper>
+</CartProvider>
     )
 }
 
@@ -202,13 +213,15 @@ const HeaderWraper = styled.section`
 /* Count Badge */
 .count {
   background: #ef4444;
-  min-width: 16px;
-  height: 16px;
+  color: #fff;
+  min-width: 20px;
+  height: 20px;
   font-size: 0.65rem;
   padding: 0 4px;
-  top: -4px;
+  top: 24px;
   right: -4px;
   border: 2px solid white;
+  border-radius:50%;
 }
 
 

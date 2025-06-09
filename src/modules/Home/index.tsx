@@ -7,10 +7,12 @@ import { OffSalesDiscountBanner } from "../../components/BannerOffSales"
 import { NewsLetterSection } from "../../components/NewsLetter"
 import { NewArrivalsListPage } from "./newArrivals"
 import { CartProvider } from "../../contexts/CartDrawerContext"
+import { Header } from "../../components/Nav"
 const HomeModule = () => {
   return (
     <CartProvider>
       <Fragment>
+        <Header/>
         <HeroBanner />
 
         <BannerAdsSales />

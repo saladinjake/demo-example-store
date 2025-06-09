@@ -1,5 +1,5 @@
 import { Routes, Route, Link, } from "react-router-dom";
-import { Header } from "../components/Nav"
+
 import { lazy } from "react"
 import { PrivateRoute } from "./Private"
 import ForgotPasswordForm from "../modules/Auth/ForgotPassword";
@@ -17,7 +17,7 @@ export const RouteOutlets = () => {
 
   return (
     <>
-      <Header />
+   
       <Routes>
         <Route path="/" element={<HomePageModule />} />
         <Route path="/products-explorer" element={<Shop />} />
