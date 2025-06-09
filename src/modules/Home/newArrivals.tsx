@@ -1,18 +1,19 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState, useRef } from 'react';
 import ProductGrid from '../../components/Products/NewArrivals';
 import { ProductProvider, useProductContext, Product } from '../../contexts/NewArrivalProductContext';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../contexts/CartDrawerContext';
+import { generateProducts } from '../../components/Products/ProductDetail/FrequentlyBoughtSupplierProduct';
 const MOCK_PRODUCTS: Product[] = [
- { id: 1, description: "Sample Description", name: "Rock Town T-shirt", thumbnail: "/images/products/f1.jpg", price: "22.44", brand: "Rock town", shipping: 2.22, discount:1 },
-  { id: 2, description: "Sample Description", name: "Cardilac T-shirt", thumbnail: "/images/products/f2.jpg", price: "22.44", brand: "Mtv" ,shipping: 2.22, discount:1},
-  { id: 3, description: "Sample Description", name: "Rosewell T-shirt", thumbnail: "/images/products/f3.jpg", price: "22.44", brand: "Roswell", shipping: 2.22, discount:1},
-  { id: 4, description: "Sample Description", name: "Bonjo T-shirt", thumbnail: "/images/products/f4.jpg", price: "22.44", brand: "Bonjo" ,shipping: 2.22, discount:1},
-  { id: 5, description: "Sample Description", name: "Dior T-shirt", thumbnail: "/images/products/f5.jpg", price: "22.44", brand: "Dior" ,shipping: 2.22, discount:1},
-  { id: 6, description: "Sample Description", name: "Sven T-shirt", thumbnail: "/images/products/f6.jpg", price: "22.44", brand: "Sven",shipping: 2.22, discount:1 },
-  { id: 7, description: "Sample Description", name: "Resses T-shirt", thumbnail: "/images/products/f7.jpg", price: "22.44", brand: "Resses" ,shipping: 2.22, discount:1},
-  { id: 8, description: "Sample Description", name: "Jessklan T-shirt", thumbnail: "/images/products/f8.jpg", price: "22.44", brand: "Jess",shipping: 2.22, discount:1 },
+  { id: 1, description: "Sample Description", name: "Rock Town T-shirt", thumbnail: "/images/products/f1.jpg", price: "22.44", brand: "Rock town", shipping: 2.22, discount: 1 },
+  { id: 2, description: "Sample Description", name: "Cardilac T-shirt", thumbnail: "/images/products/f2.jpg", price: "22.44", brand: "Mtv", shipping: 2.22, discount: 1 },
+  { id: 3, description: "Sample Description", name: "Rosewell T-shirt", thumbnail: "/images/products/f3.jpg", price: "22.44", brand: "Roswell", shipping: 2.22, discount: 1 },
+  { id: 4, description: "Sample Description", name: "Bonjo T-shirt", thumbnail: "/images/products/f4.jpg", price: "22.44", brand: "Bonjo", shipping: 2.22, discount: 1 },
+  { id: 5, description: "Sample Description", name: "Dior T-shirt", thumbnail: "/images/products/f5.jpg", price: "22.44", brand: "Dior", shipping: 2.22, discount: 1 },
+  { id: 6, description: "Sample Description", name: "Sven T-shirt", thumbnail: "/images/products/f6.jpg", price: "22.44", brand: "Sven", shipping: 2.22, discount: 1 },
+  { id: 7, description: "Sample Description", name: "Resses T-shirt", thumbnail: "/images/products/f7.jpg", price: "22.44", brand: "Resses", shipping: 2.22, discount: 1 },
+  { id: 8, description: "Sample Description", name: "Jessklan T-shirt", thumbnail: "/images/products/f8.jpg", price: "22.44", brand: "Jess", shipping: 2.22, discount: 1 },
 
 ]
 
@@ -21,10 +22,38 @@ function NewArrivalsProductsSection({ title, subTitle }: { title: string; subTit
 
   const { addItem } = useCart()
   const navigate = useNavigate()
+
+  // FOR SIMPLE SMALL DISPLAY WHEN DEBUGGING UI
   useEffect(() => {
     // Load products from mock data or localStorage:
-    setProducts(MOCK_PRODUCTS);
+    const productPayLoads: any = generateProducts(10) || MOCK_PRODUCTS
+    setProducts(productPayLoads);
   }, [setProducts]);
+
+
+
+  const [hasMore, setHasMore] = useState(true);
+  const loaderRef = useRef(null);
+
+
+  // Load More Products on Scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setTimeout(() => {
+            const newLoads: any = [...generateProducts(10)]
+            setProducts((prev) => [...prev, ...newLoads]);
+            if (products.length >= 300) setHasMore(false);
+          }, 1000);
+        }
+      },
+      { threshold: 1.0 }
+    );
+
+    if (loaderRef.current) observer.observe(loaderRef.current);
+    return () => observer.disconnect();
+  }, [hasMore, products]);
 
   // Apply filter:
   const filtered = products.filter((p) =>
@@ -62,10 +91,12 @@ function NewArrivalsProductsSection({ title, subTitle }: { title: string; subTit
 
                     <a href="#" onClick={(e) => {
                       e.preventDefault()
-                      addItem({ imageUrl: product.thumbnail,
-                         brand: product.brand, name: product.name, 
-                         price: Number(product.price), id:product.id,
-                          shipping: product.shipping, discount: product.discount })
+                      addItem({
+                        imageUrl: product.thumbnail,
+                        brand: product.brand, name: product.name,
+                        price: Number(product.price), id: product.id,
+                        shipping: product.shipping, discount: product.discount
+                      })
                     }}><i className="fas fa-shopping-cart cart">Add to cart</i></a>
                   </div>
                 </div>
@@ -75,7 +106,7 @@ function NewArrivalsProductsSection({ title, subTitle }: { title: string; subTit
           </Container>
 
         </ProductGrid>
-
+ {hasMore && <div ref={loaderRef} style={{ height: 20, marginTop: 20 }} />}
       </ProductLisingWrapper>
     </>
   );

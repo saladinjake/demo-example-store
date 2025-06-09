@@ -57,12 +57,14 @@ const Price = styled.p`
 `;
 
 // Dummy Data Generator
-const generateProducts = (count: number) => {
+export const generateProducts = (count: number) => {
   return Array.from({ length: count }, (_, index) => {
     const id = Math.floor((Math.random() * 8 + 1))
+    const thumbnail =`/images/products/f${Math.floor((Math.random() * 8 + 1))}.jpg`;
     return ({
       id,
       name: `Product ${index + 1}`,
+      thumbnail,
       image: `/images/products/f${Math.floor((Math.random() * 8 + 1))}.jpg`,
       price: `$${(Math.random() * 10 + 5).toFixed(2)}`,
       shipping:1.1,
