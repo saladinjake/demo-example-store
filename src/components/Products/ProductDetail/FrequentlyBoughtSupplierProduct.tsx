@@ -65,6 +65,9 @@ const generateProducts = (count: number) => {
       name: `Product ${index + 1}`,
       image: `/images/products/f${Math.floor((Math.random() * 8 + 1))}.jpg`,
       price: `$${(Math.random() * 10 + 5).toFixed(2)}`,
+      shipping:1.1,
+      discount: 1,
+      description: `Sample Description`
     })
   });
 };
