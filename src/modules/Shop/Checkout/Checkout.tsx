@@ -4,6 +4,7 @@ import ShippingDetails from "./ShippingDetails";
 import PaymentMethod from "./PaymentMethod";
 // import Confirmation from "./Confirmation";
 import OrderSummary from "./OrderSummary";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const CheckoutContainer = styled.div`
   display: flex;
@@ -55,6 +56,7 @@ const Checkout = () => {
 
   const handleNext = () => setActiveStep((prev) => prev + 1);
   const handlePrevious = () => setActiveStep((prev) => prev - 1);
+  const { user} = useAuth()
 
   const [canProceed, setCanProceed] = useState(false)
   return (
@@ -63,7 +65,7 @@ const Checkout = () => {
         <Accordion>
           <AccordionHeader onClick={() => setActiveStep(1)}>Shipping Details</AccordionHeader>
           <AccordionContent isOpen={activeStep === 1}>
-            <ShippingDetails handleProceed={() => setCanProceed(true)} onNext={() => canProceed && handleNext()} />
+            <ShippingDetails handleProceed={() => setCanProceed(true)} onNext={() => user && canProceed && handleNext()} />
           </AccordionContent>
         </Accordion>
         <Accordion>
