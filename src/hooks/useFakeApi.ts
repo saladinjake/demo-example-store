@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { fakeApi, Item, CreateItemPayload, UpdateItemPayload } from "../api/services/products.api";
+import { fakeApi, Item } from "../api/services/products.api";
 
 export const useFakeApi = () => {
   const [items, setItems] = useState<Item[]>([]);
@@ -27,7 +27,7 @@ export const useFakeApi = () => {
     fetchItems();
   }, [fetchItems]);
 
-  const createItem = async (payload: CreateItemPayload) => {
+  const createItem = async (payload: any) => {
     try {
       setLoading(true);
       await fakeApi.createItem(payload);
@@ -39,7 +39,7 @@ export const useFakeApi = () => {
     }
   };
 
-  const updateItem = async (id: number, payload: UpdateItemPayload) => {
+  const updateItem = async (id: number, payload: any) => {
     try {
       setLoading(true);
       await fakeApi.updateItem(id, payload);

@@ -12,7 +12,7 @@ export function withAuth(
   WrappedComponent: React.ComponentType,
   options: WithAuthOptions
 ) {
-  return (props: P) => {
+  return (props: any ) => {
     const { user } = useAuth();
 
     if (!user) {

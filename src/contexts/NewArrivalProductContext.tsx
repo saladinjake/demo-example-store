@@ -14,15 +14,15 @@ export type Product = {
 interface ProductContextType {
   filter: string;
   setFilter: (filter: string) => void;
-  products: Product[];
-  setProducts: (products: Product[]) => void;
+  products:  any;
+  setProducts: (products: any) => void;
 }
 
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
 export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [filter, setFilter] = useState('');
-  const [products, setProducts] = useState<Product[]| any[]>([]);
+  const [products, setProducts] = useState<any[]>([]);
 
   return (
     <ProductContext.Provider value={{ filter, setFilter, products, setProducts }}>

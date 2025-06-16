@@ -43,7 +43,7 @@ const ChangePassword = () => {
       setError("Password mismatch");
       return;
     }
-    const success: any = signup(values);
+    const success: any = signup(values.email, values.password);
 
     if (success) {
       navigate("/");

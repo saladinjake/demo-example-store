@@ -53,7 +53,7 @@ const ButtonGroup = styled.div`
 `;
 
 const Button = styled.button`
-  background: ${(props) => (props.primary ? "#3182ce" : "#e53e3e")};
+  background: #3182ce ;
   color: #fff;
   border: none;
   padding: 10px 15px;
@@ -126,7 +126,7 @@ const ProductDetails = () => {
       </PriceContainer>
 
       <ButtonGroup>
-        <Button primary>Add to Cart</Button>
+        <Button>Add to Cart</Button>
         <Button>Chat Now</Button>
       </ButtonGroup>
     </Container>

@@ -4,76 +4,122 @@ import { useNavigate } from "react-router-dom"
 import { CartProvider, useCart } from "../contexts/CartDrawerContext"
 
 export const Header = () => {
-    const { user } = useAuth()
-    const {cart } = useCart()
-const navigate = useNavigate()
+  const { user } = useAuth()
+  const { cart } = useCart()
+  const navigate = useNavigate()
 
-const isActiveNav = (bitUrl: string) => {
-  return window.location.href.includes(bitUrl)
-}
+  const isActiveNav = (bitUrl: string) => {
+    return window.location.href.includes(bitUrl)
+  }
 
-const isHome = () =>{
-  return window.location.href.split("/").pop() ===""
-}
-    return (
-<CartProvider>
-        <HeaderWraper>
-            {/*desktop*/}
-            <a href="./"><img src="images/logo.png" className="logo" alt="Shop" /></a>
-            <div>
-                <Menu>
-                    <MenuItem><a className={isActiveNav("") && isHome() ? "active": ""} href="/">Home</a></MenuItem>
-                    <MenuItem><a className={isActiveNav("/products-explorer")? "active": ""} href="/products-explorer">Shop</a></MenuItem>
-                    <MenuItem><a className={isActiveNav("/login")? "active": ""} href="/login">Login</a></MenuItem>
-                    <MenuItem><a className={isActiveNav("/register")? "active": ""} href="/register">Signup</a></MenuItem>
-                     <MenuItem><a className={isActiveNav("/cart")? "active": ""} href="/cart">Cart<span className="count">{cart.length}</span></a></MenuItem>
-                    <MenuItem id="lg-bag"><a href="/cart"><i className="far fa-shopping-bag"></i></a></MenuItem>
+  const isHome = () => {
+    return window.location.href.split("/").pop() === ""
+  }
 
-                    {user && <MenuItem id="lg-bag">
-                        <button className="dropdown-button">
-                            <div className="avatar avatar-md">
-                                <img src="..." className="dropdown-standalone" />
-                                <span className="badge status online"></span>
-                            </div>
-                        </button>
-                        <ul className="dropdown-list">
-                            <li><a href="#" >Welcome Back {user?.name}</a></li>
+  const guestUserID = () => {
+    if (!user && cart.length > 0) {
+      if (localStorage.getItem("guest")) {
+        const guest = localStorage.getItem("guest");
+        return guest
+      } else {
+        const guest = Math.floor(Math.random() * 40000 + 1)
+        localStorage.setItem("guest", guest.toString());
 
-                            <li onClick={() => navigate("/cart")}><a href="#" >My Cart<span className="count">{cart.length}</span></a></li>
-                            <li onClick={() => navigate("/wishlist")}><a href="#" >My Wishlists</a></li>
-                            <li onClick={() => navigate("/orders")}><a href="#" >My Orders</a></li>
-                            <li><a href="#">Logout</a></li>
-                        </ul>
-                    </MenuItem>
+        return guest
+      }
+    }
+  }
+  return (
+    <CartProvider>
+      <HeaderWraper>
+        {/*desktop*/}
+        <a href="./"><img src="images/logo.png" className="logo" alt="Shop" /></a>
+        <div>
+          <Menu>
+            <MenuItem><a className={isActiveNav("") && isHome() ? "active" : ""} href="/">Home</a></MenuItem>
+            <MenuItem><a className={isActiveNav("/products-explorer") ? "active" : ""} href="/products-explorer">Shop</a></MenuItem>
+            {!user && <MenuItem><a className={isActiveNav("/login") ? "active" : ""} href="/login">Login</a></MenuItem>
+            }
+            {!user && <MenuItem><a className={isActiveNav("/register") ? "active" : ""} href="/register">Signup</a></MenuItem>
+            }<MenuItem><a className={isActiveNav("/cart") ? "active" : ""} href="/cart">Cart<span className="count">{cart.length}</span></a></MenuItem>
+            <MenuItem id="lg-bag"><a href="/cart"><i className="far fa-shopping-bag"></i></a></MenuItem>
 
-                    }
-                    <a href="#" id="close"><i className="far fa-times"></i></a>
-                </Menu>
-            </div>
-            {/*mobile*/}
-            <div id="mobile">
-
-                <input type="checkbox" id="side-toggle" className="side-toggle" />
-                <label className="hamburger">&#9776;</label>
-
-                <div className="side-drawer">
-                    <label className="close-btn">&times;</label>
-                    <nav className="drawer-menu">
-                        <a href="#">Home</a>
-                        <a href="#">Shop</a>
-                        <a href="#">Login</a>
-                        <a href="#">Sign Up</a>
-                    </nav>
+            {/***Returnng customer with us***/}
+            {user && <MenuItem id="lg-bag">
+              <button className="dropdown-button">
+                <div className="avatar avatar-md">
+                  <img src="..." className="dropdown-standalone" />
+                  <span className="badge status online"></span>
                 </div>
+              </button>
+              <ul className="dropdown-list">
+                <li><a href="#" >Welcome Back {user?.name}</a></li>
 
-                <a href="/cart"><i className="far fa-shopping-bag"></i></a>
-                <i id="bar" className="fas fa-outdent"></i>
+                <li onClick={() => navigate("/cart")}><a href="#" >My Cart<span className="count">{cart.length}</span></a></li>
+                <li onClick={() => navigate("/wishlist")}><a href="#" >My Wishlists</a></li>
+                <li onClick={() => navigate("/orders")}><a href="#" >My Orders</a></li>
+                <li><a href="#">Logout</a></li>
+              </ul>
+            </MenuItem>
+            }
 
-            </div>
+            {/**Guest surfing our products*/}
 
-        </HeaderWraper>
-</CartProvider>
-    )
+            {(!user && cart.length) > 0 && <MenuItem id="lg-bag">
+              <button className="dropdown-button">
+                <div className="">
+                  <li><a href="#" >Guest User {guestUserID()}</a></li>
+
+                  <span className="badge status online"></span>
+                </div>
+              </button>
+            </MenuItem>
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <a href="#" id="close"><i className="far fa-times"></i></a>
+          </Menu>
+        </div>
+        {/*mobile*/}
+        <div id="mobile">
+
+          <input type="checkbox" id="side-toggle" className="side-toggle" />
+          <label className="hamburger">&#9776;</label>
+
+          <div className="side-drawer">
+            <label className="close-btn">&times;</label>
+            <nav className="drawer-menu">
+              <a href="#">Home</a>
+              <a href="#">Shop</a>
+              <a href="#">Login</a>
+              <a href="#">Sign Up</a>
+            </nav>
+          </div>
+
+          <a href="/cart"><i className="far fa-shopping-bag"></i></a>
+          <i id="bar" className="fas fa-outdent"></i>
+
+        </div>
+
+      </HeaderWraper>
+    </CartProvider>
+  )
 }
 
 

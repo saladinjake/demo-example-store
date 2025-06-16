@@ -38,7 +38,7 @@ const VariationImage = styled.img`
   object-fit: cover;
   cursor: pointer;
   border-radius: 5px;
-  border: ${(props) => (props.selected ? "2px solid #e53e3e" : "1px solid #ddd")};
+  border:  2px solid #e53e3e;
   &:hover {
     border: 2px solid #e53e3e;
   }
@@ -67,7 +67,7 @@ const ButtonGroup = styled.div`
 
 const Button = styled.button`
   flex: 1;
-  background: ${(props) => (props.primary ? "#3182ce" : "#e53e3e")};
+  background:  #3182ce";
   color: white;
   border: none;
   padding: 10px;
@@ -112,7 +112,7 @@ const ProductDisplay = () => {
               key={variation.id}
               src={variation.image}
               alt={variation.name}
-              selected={selectedVariation.id === variation.id}
+              // selected={selectedVariation.id === variation.id}
               onClick={() => setSelectedVariation(variation)}
             />
           ))}
@@ -130,7 +130,7 @@ const ProductDisplay = () => {
         <Price>Starting from {product.priceTiers["1-9"]}</Price>
 
         <ButtonGroup>
-          <Button primary>Add to Cart</Button>
+          <Button>Add to Cart</Button>
           <Button>Chat Now</Button>
         </ButtonGroup>
       </DetailsSection>

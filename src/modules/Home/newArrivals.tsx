@@ -43,7 +43,7 @@ function NewArrivalsProductsSection({ title, subTitle }: { title: string; subTit
         if (entries[0].isIntersecting && hasMore) {
           setTimeout(() => {
             const newLoads: any = [...generateProducts(10)]
-            setProducts((prev) => [...prev, ...newLoads]);
+            setProducts( prev => [...prev, ...newLoads]);
             if (products.length >= 300) setHasMore(false);
           }, 1000);
         }

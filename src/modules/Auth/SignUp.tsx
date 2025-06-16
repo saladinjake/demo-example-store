@@ -11,7 +11,7 @@ import { useAuth } from "../../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 const SignUp = () => {
   const navigate = useNavigate();
-  const { signup, user } = useAuth();
+  const { signup, user, loading } = useAuth();
   const [editable, setEditable] = useState(true)
 
   const [credentials, setCredentials] = useState({
@@ -36,8 +36,8 @@ const SignUp = () => {
 
 
 
-  const handleSendToApi = async (e: any) => {
-    e.preventDefault();
+  const handleSendToApi = async () => {
+    
     if (!values.email || !values.password) {
       setError("Email and password required");
       return;
@@ -122,8 +122,10 @@ const SignUp = () => {
                 width="100%"
               /></Box>
             <Box py="4">
-              <Button type="submit" width="100%" color="primary" variant="outline">Sign Up</Button>
-
+                <Button onClick={handleSendToApi} type="submit" width="100%" color="primary"
+             disabled={invalid}
+             loading={false}
+            variant="outline">  {loading ? 'Loading...' : 'Sign Up'}</Button>
             </Box>
           </form>
         </FormCard>

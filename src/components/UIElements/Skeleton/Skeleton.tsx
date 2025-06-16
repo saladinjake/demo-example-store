@@ -12,7 +12,7 @@ const SkeletonWrap = (
   wrapper
 ) => {
   return (
-    <SkeletonTheme color={color}>
+    <SkeletonTheme>
       <Skeleton
         height={height}
         circle={circle}

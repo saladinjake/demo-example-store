@@ -44,7 +44,8 @@ const Button = styled.button`
   border: none;
   cursor: pointer;
   font-size: 14px;
-  ${({ primary }) => (primary ? "background-color: orange; color: white;" : "background-color: #ddd;")}
+  background-color: orange; 
+  color: white;
 `;
 
 const ExpandableSection = styled.div`
@@ -92,7 +93,7 @@ const ProductLeadInfoPage = () => {
 
       {/* Actions */}
       <Buttons>
-        <Button primary>Start Order</Button>
+        <Button>Start Order</Button>
         <Button>Add to Cart</Button>
         <Button>Chat Now</Button>
       </Buttons>

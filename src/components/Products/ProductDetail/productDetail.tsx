@@ -146,7 +146,7 @@ const ProductDetailsSectionA = () => {
   const { id } = useParams()
   const [selectedImage, setSelectedImage] = useState<any>( parseInt(id) <= product.images[0].length ? product.images[parseInt(id) -1]: product.images[0]);
 
-  const productInfo = defaultData.find(item => item.id ==id) || defaultData[0];
+  const productInfo = defaultData.find( (item: any) => item.id ==id) || defaultData[0];
 const { addItem } = useCart()
   return (
     

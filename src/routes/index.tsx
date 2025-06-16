@@ -24,7 +24,7 @@ export const RouteOutlets = () => {
         <Route path="/products-explorer/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />}/>
         <Route path="/wishlist" element={<WishList />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/cart/checkout" element={<CheckoutPage />} />
         <Route path="/other-payment-method" element={<CheckoutAlternative />}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<SignUp />} />

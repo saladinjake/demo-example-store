@@ -4,7 +4,7 @@ import { StyledLoader } from "./Loader.styles";
 
 const Loader = ({ variant }: {variant: any}) => {
   return (
-    <StyledLoader variant={variant}>
+    <StyledLoader>
       <div className="spinner-wrap">
         <span className="spinner"></span>
       </div>

@@ -40,7 +40,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <Flex direction="column" style={{ opacity: disabled ? "0.7" : 1 }}>
       {isLoading ? (
-        <Skeleton width="30%" />
+        <></>
       ) : (
         <>
           {label && (
@@ -55,7 +55,7 @@ const Input: React.FC<InputProps> = ({
 
       {isLoading ? (
         <Box mt="4">
-          <Skeleton height="40px" width="100%" />
+           <></>
         </Box>
       ) : (
         <InputWrapper
@@ -84,7 +84,7 @@ const Input: React.FC<InputProps> = ({
 
       {error && (
         <Error>
-          <StyledErrorIcon src={ErrorIcon} alt="error-icon" />
+          {/* <StyledErrorIcon src={ErrorIcon} alt="error-icon" /> */}
           {message}
         </Error>
       )}
