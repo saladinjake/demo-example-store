@@ -34,22 +34,7 @@ const ChangePassword = () => {
 
   const handleSendToApi = (e: any) => {
     e.preventDefault();
-    if (!values.email || !values.password) {
-      setError("Email and password required");
-      return;
-    }
 
-    if (values.password && values.confirmPassword && (values.password !== values.confirmPassword)) {
-      setError("Password mismatch");
-      return;
-    }
-    const success: any = signup(values.email, values.password);
-
-    if (success) {
-      navigate("/");
-    } else {
-      setError("Login failed");
-    }
   };
 
   return (
@@ -62,10 +47,10 @@ const ChangePassword = () => {
         <FormCard>
           <Title>Sign Up</Title>
           <form>
-            
+
             <Box py="4">
 
-             <Input
+              <Input
                 required
                 label="Password"
                 isLoading={false}

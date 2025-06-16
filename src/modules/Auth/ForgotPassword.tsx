@@ -10,20 +10,20 @@ import useForm, { hasError } from "../../hooks/useForm";
 import { useAuth } from "../../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 const ForgotPasswordForm = () => {
-  
-    const navigate = useNavigate();
-    const {  user } = useAuth();
+
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   const [credentials, setCredentials] = useState({
     password: ""
 
   })
   const [editable, setEditable] = useState(true)
-  
-   useEffect(()=>{
-    
-        if(user) navigate("/")
-      },[user])
+
+  useEffect(() => {
+
+    if (user) navigate("/")
+  }, [user])
 
 
   const { values, handleChange, handleSubmit, errors, touched, invalid } =
