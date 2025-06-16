@@ -56,23 +56,24 @@ const Checkout = () => {
   const handleNext = () => setActiveStep((prev) => prev + 1);
   const handlePrevious = () => setActiveStep((prev) => prev - 1);
 
+  const [canProceed, setCanProceed] = useState(false)
   return (
     <CheckoutContainer>
       <MainSection>
         <Accordion>
           <AccordionHeader onClick={() => setActiveStep(1)}>Shipping Details</AccordionHeader>
           <AccordionContent isOpen={activeStep === 1}>
-            <ShippingDetails onNext={handleNext} />
+            <ShippingDetails handleProceed={() => setCanProceed(true)} onNext={() => canProceed && handleNext()} />
           </AccordionContent>
         </Accordion>
         <Accordion>
-          <AccordionHeader onClick={() => setActiveStep(2)}>Payment Method</AccordionHeader>
+          <AccordionHeader onClick={() => canProceed && setActiveStep(2)}>Payment Method</AccordionHeader>
           <AccordionContent isOpen={activeStep === 2}>
             <PaymentMethod onNext={handleNext} onPrevious={handlePrevious} />
           </AccordionContent>
         </Accordion>
         <Accordion>
-          <AccordionHeader onClick={() => setActiveStep(3)}>Confirmation & Order Completion</AccordionHeader>
+          <AccordionHeader onClick={() => canProceed && setActiveStep(3)}>Confirmation & Order Completion</AccordionHeader>
           <AccordionContent isOpen={activeStep === 3}>
             {/* <Confirmation onPrevious={handlePrevious} /> */}
           </AccordionContent>

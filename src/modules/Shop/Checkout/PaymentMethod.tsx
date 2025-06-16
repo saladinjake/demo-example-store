@@ -3,6 +3,7 @@ import styled from "styled-components";
 import AddCardPreferenceModal from "./AddCardPreferenceModal"
 import { FaCcVisa, FaCcMastercard, FaCcAmex, FaCcPaypal, FaCcApplePay, FaGooglePay } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../../contexts/CartDrawerContext";
 
 // Styled Components
 const PaymentSection = styled.div`
@@ -80,6 +81,7 @@ const ProceedButton = styled.button`
 const PaymentComponent = ({ onNext, onPrevious}) => {
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate()
+    const { cart } = useCart()
   return (
     <PaymentSection>
       {/* Payment Method */}
@@ -103,15 +105,21 @@ const PaymentComponent = ({ onNext, onPrevious}) => {
         <SectionTitle>Items and delivery options</SectionTitle>
         <p><strong>Sold by:</strong> Baoding Bateli Luggage Manufacturing Co., Ltd.</p>
         <p><strong>Delivery by:</strong> Mar 27 | <DiscountText>USD 43.97</DiscountText> USD 23.97</p>
-
+        {
+        cart && cart.map(item => {
+          return (
+            
         <Item>
-          <ItemImage src="/sampleProduct.jpg" alt="Product" />
+          <ItemImage src={item?.thumbnail || item.imageUrl}  alt="Product" />
           <ItemDetails>
-            <p><strong>Leather Exquisite Trendy Shoulder Bag</strong></p>
-            <p>Color: White | Size: M</p>
-            <p><strong>USD 6.03 / piece</strong></p>
+            <p><strong>{item.name}</strong></p>
+            <p>Color: {item.color || " Same as Selected"}|  Size: {item?.size || "M"}</p>
+            <p><strong>USD {item.price} / piece</strong></p>
           </ItemDetails>
         </Item>
+          )
+        })
+        }
       </ItemsContainer>
       <AddCardPreferenceModal showModal={showModal} setShowModal={setShowModal}/>
 
