@@ -1,10 +1,12 @@
+import { useCart } from "../../../contexts/CartDrawerContext";
 import Grid from "../../../components/UIElements/Grid";
-import React, { useState} from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
+import { useNavigate } from "react-router-dom";
 
 
 // Styled Modal
-const ModalOverlay = styled.div<{show: boolean}>`
+const ModalOverlay = styled.div<{ show: boolean }>`
   display: ${(props) => (props.show ? "flex" : "none")};
   position: fixed;
   top: 0;
@@ -22,6 +24,12 @@ const ModalContent = styled.div`
   width: 800px;
   border-radius: 8px;
   position: relative;
+
+  h3{
+   margin-top:10px;
+   font-size:20px;
+   margin-bottom: 20px
+  }
 `;
 
 const CloseButton = styled.button`
@@ -59,25 +67,35 @@ const ConfirmButton = styled.button`
 `;
 
 
-export default function AddCardPreferenceModal({showModal, setShowModal}){
-    return (
-        <ModalOverlay show={showModal}>
-        <ModalContent>
-          <CloseButton onClick={() => setShowModal(false)}>×</CloseButton>
-          <h3>Add a new card</h3>
-          <Grid templateColumn="repeat(2, 1fr)" gap="45px 30px">
+export default function AddCardPreferenceModal({ showModal, setShowModal }) {
+  const { clearCart } = useCart()
+  const navigate = useNavigate()
+  return (
+    <ModalOverlay show={showModal}>
+      <ModalContent>
+        <CloseButton onClick={() => setShowModal(false)}>×</CloseButton>
+        <h3>Add a new card</h3>
+        <Grid templateColumn="repeat(2, 1fr)" gap="45px 30px">
           <Input type="text" placeholder="Card number *" />
           <Input type="text" placeholder="Given name(s) *" />
           <Input type="text" placeholder="Surname *" />
           <Input type="text" placeholder="MM / YY *" />
           <Input type="password" placeholder="CVV / CVC *" />
-          </Grid>
-         
-          <label style={{marginTop:"10px", marginBottom:"10px"}}>
-            <input type="checkbox" /> Remember this card
-          </label>
-          <ConfirmButton>Confirm</ConfirmButton>
-        </ModalContent>
-      </ModalOverlay>
-    )
+        </Grid>
+
+        <label>
+          <input type="checkbox" style={{ marginTop: "20px", marginBottom: "20px" }} /> Remember this card
+        </label>
+        <ConfirmButton onClick={() => {
+          clearCart()
+          alert("Fake payment completed. Here ends the demo")
+
+          setTimeout(() => {
+
+            navigate("/")
+          }, 2000)
+        }}>Confirm</ConfirmButton>
+      </ModalContent>
+    </ModalOverlay>
+  )
 }

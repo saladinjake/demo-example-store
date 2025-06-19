@@ -128,7 +128,7 @@ const PaymentComponent = () => {
             <CheckboxLabel>
               <input type="checkbox" /> Remember this card
             </CheckboxLabel>
-            <PayButton>Pay Now</PayButton>
+            <PayButton onClick={()=> alert("Here ends the demo version")}>Pay Now</PayButton>
           </PaymentForm>
         </AccordionContent>
       </Accordion>
@@ -143,7 +143,7 @@ const PaymentComponent = () => {
         </AccordionHeader>
         <AccordionContent active={activeIndex === 1}>
           <p>You'll be redirected to PayPal to complete your payment.</p>
-          <PayButton>Proceed with PayPal</PayButton>
+          <PayButton onClick={()=> alert("Here ends the demo version")}>Proceed with PayPal</PayButton>
         </AccordionContent>
       </Accordion>
 
@@ -157,7 +157,7 @@ const PaymentComponent = () => {
         </AccordionHeader>
         <AccordionContent active={activeIndex === 2}>
           <p>Use Apple Pay for a seamless checkout.</p>
-          <PayButton>Pay with Apple Pay</PayButton>
+          <PayButton onClick={()=> alert("Here ends the demo version")}>Pay with Apple Pay</PayButton>
         </AccordionContent>
       </Accordion>
 
@@ -171,7 +171,7 @@ const PaymentComponent = () => {
         </AccordionHeader>
         <AccordionContent active={activeIndex === 3}>
           <p>Use Google Pay for fast and secure payments.</p>
-          <PayButton>Pay with Google Pay</PayButton>
+          <PayButton onClick={()=> alert("Here ends the demo version")}>Pay with Google Pay</PayButton>
         </AccordionContent>
       </Accordion>
     </PaymentContainer>

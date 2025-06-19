@@ -52,7 +52,7 @@ const shippingValdation = (values: any) => {
 
     return errors;
 }
-const ShippingDetails = ({ onNext, handleProceed }: { onNext: () => void, handleProceed: () => any }) => {
+const ShippingDetails = ({ onNext }: { onNext: () => void }) => {
 
     const initialState = {
         country: "Nigeria",
@@ -88,12 +88,12 @@ const ShippingDetails = ({ onNext, handleProceed }: { onNext: () => void, handle
             if (!user) {
                 // register guest user then proceed to next step
                 signup(values.email, values.password)
-                handleProceed()
+                
                 onNext()
                 return
             }
         }
-        handleProceed()
+
         onNext()
         return
     }
@@ -145,9 +145,9 @@ const ShippingDetails = ({ onNext, handleProceed }: { onNext: () => void, handle
                     <Flex gap="20px" justifyContent="start" direction="column">
 
                         <label>Country / Region</label>
-                        <Input label="Country" value={values.country} onChangePure={handleChange} 
-              error={hasError("country", touched, errors)}
-              message={hasError("country", touched, errors)} />
+                        <Input label="Country" value={values.country} onChangePure={handleChange}
+                            error={hasError("country", touched, errors)}
+                            message={hasError("country", touched, errors)} />
                     </Flex>
                 </Grid.Item>
 

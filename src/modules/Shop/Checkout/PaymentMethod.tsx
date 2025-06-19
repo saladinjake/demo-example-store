@@ -7,15 +7,18 @@ import { useCart } from "../../../contexts/CartDrawerContext";
 
 // Styled Components
 const PaymentSection = styled.div`
-
-
   padding: 20px;
   border-radius: 8px;
   background: #fff;
+
+  label{
+  font-size: 20px;
+  }
 `;
 
 const SectionTitle = styled.h3`
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 26px
 `;
 
 const PaymentMethod = styled.div`

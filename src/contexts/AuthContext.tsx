@@ -19,7 +19,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const LOCAL_STORAGE_KEY = 'demo-shop-auth-user';
 
 const mockUsers: User[] = [
-  { id: '1', name: 'Alice@me.com',  role: 'admin' },
+  { id: '1', name: 'Alice@me.com', role: 'admin' },
   { id: '2', name: 'Bob@me.com', role: 'user' },
   { id: '3', name: 'Charlie@me.com', role: 'vendor' },
 ];
@@ -27,7 +27,10 @@ const mockUsers: User[] = [
 
 const mockCheckCredentials = (username: string, password: string): User | null => {
   if (!username || !password) return null;
-  const found = mockUsers.find((u) => u.name.toLowerCase() === username.toLowerCase());
+
+
+  const mockedDb  = localStorage.getItem("users") ? JSON.parse(localStorage.getItem("users")) : mockUsers
+  const found = mockedDb.find((u) => u.name.toLowerCase() === username.toLowerCase());
   return found || null;
 };
 
@@ -43,7 +46,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       )
 
     }
-
     const storedUser = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (storedUser) {
       setUser(JSON.parse(storedUser));
@@ -72,10 +74,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (localStorage.getItem("users")) {
       const users = JSON.parse(localStorage.getItem("users"
       ))
-      users.push({ id: users.length+ 1, name: email, password, role: "user" })
-      localStorage.setItem("users", JSON.stringify
-        (users)
-      )
+      const foundUser = mockCheckCredentials(email, password);
+      if (!foundUser) {
+
+        users.push({ id: users.length + 1, name: email, password, role: "user" })
+        const uniqueUsers = new Set(users)
+        localStorage.setItem("users", JSON.stringify
+          (Array.from(uniqueUsers))
+        )
+      }else{
+        alert("User already exist with this email")
+      }
+
     }
     return login(email, password)
   }

@@ -38,6 +38,7 @@ function cartReducer(state: any, action: any) {
       );
     }
     case "CLEAR_CART": {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([]));
       return [];
     }
     default:
